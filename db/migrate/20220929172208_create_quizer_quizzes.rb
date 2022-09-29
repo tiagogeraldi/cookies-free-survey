@@ -8,5 +8,8 @@ class CreateQuizerQuizzes < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :quizer_quizzes, :owner_secret, unique: true
+    add_index :quizer_quizzes, :audience_secret, unique: true
   end
 end

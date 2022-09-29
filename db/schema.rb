@@ -21,6 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_172208) do
     t.boolean "public_results"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["audience_secret"], name: "index_quizer_quizzes_on_audience_secret", unique: true
+    t.index ["owner_secret"], name: "index_quizer_quizzes_on_owner_secret", unique: true
   end
 
 end
