@@ -1,0 +1,22 @@
+<div id="<%= dom_id quiz %>">
+  <p>
+    <strong>Description:</strong>
+    <%= quiz.description %>
+  </p>
+
+  <p>
+    <strong>Owner secret:</strong>
+    <%= quiz.owner_secret %>
+  </p>
+
+  <p>
+    <strong>Audience secret{20}:</strong>
+    <%= quiz.audience_secret{20} %>
+  </p>
+
+  <p>
+    <strong>Public results:</strong>
+    <%= quiz.public_results %>
+  </p>
+
+</div>
