@@ -1,6 +1,6 @@
 class CreateQuizerQuizzes < ActiveRecord::Migration[7.0]
   def change
-    create_table :quizer_quizzes do |t|
+    create_table :quizer_quizzes, id: :uuid do |t|
       t.text :description
       t.string :owner_secret, limit: 20
       t.string :audience_secret, limit: 20

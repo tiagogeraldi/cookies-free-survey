@@ -1,0 +1,10 @@
+<h1>Editing question</h1>
+
+<%= render "form", quiz: @quiz, question: @question %>
+
+<br>
+
+<div>
+  <%= link_to "Show this question", [@quiz, @question] %> |
+  <%= link_to "Back to questions", quizer_quiz_questions_path(@quiz) %>
+</div>

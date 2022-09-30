@@ -1,4 +1,6 @@
 class Quizer::Quiz < ApplicationRecord
+  has_many :questions, dependent: :destroy, class_name: 'Quizer::Question', foreign_key: :quizer_quiz_id
+
   validates :description, presence: true
 
   def generate_secrets
