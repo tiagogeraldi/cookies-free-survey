@@ -1,17 +1,13 @@
 = form_with(model: quizer_quiz) do |form|
   - if quizer_quiz.errors.any?
-    div[style="color: red"]
-      h2
-        = pluralize(quizer_quiz.errors.count, "error")
-        |  prohibited this quizer_quiz from being saved:
-      ul
-        - quizer_quiz.errors.each do |error|
-          li
-            = error.full_message
-  div
-    = form.label :description, style: "display: block"
-    p
-      |  This description will be visible to your audience. 
-    = form.text_area :description
-  div
-    = form.submit
+    .alert.alert-warning
+      = quizer_quiz.errors.full_messages.join('. ')
+  .my-4
+    = form.label :description, class: 'form-label'
+    p.fw-light
+      | This description will be visible to your audience,
+      |  type an introduction or a welcome message.
+
+    = form.text_area :description, class: 'form-control'
+
+  = form.submit class: 'btn btn-primary'

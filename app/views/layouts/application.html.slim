@@ -19,5 +19,9 @@ html
           ul.navbar-nav.me-auto.mb-2.mb-lg-0
             li.nav-item
               = link_to 'Quizer', quizer_quizzes_url, class: 'nav-link active'
+
     .container-sm
-      = yield
+      - if notice
+        .alert.alert-success.my-2 = notice
+      .mt-3
+        = yield

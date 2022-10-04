@@ -1,7 +1,9 @@
-h1
-  | Quizzes
-p
-  |  Create free Quiz 
-p
-  |  No signup, no login, no sessions, no cookies and completely free! 
-= link_to "New quiz", new_quizer_quiz_path
+.card.my-4
+  .card-body
+    p
+     strong Create your free quiz!
+    p No sign in-up required. This app is free of any private data.
+    p It doesn't use session or cookies.
+    p Create a quiz, save the link, and send it to your audience.
+
+= link_to "Create a quiz", new_quizer_quiz_path, class: 'btn btn-primary btn-lg'

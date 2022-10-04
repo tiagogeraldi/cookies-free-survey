@@ -1,16 +1,29 @@
-p[style="color: green"]
-  = notice
-p
-  |  Save this link to return and edit the Quiz and watch the results: 
-  = url_for [@quizer_quiz, { only_path: false }]
-p
-  |  Send this link to your audience 
-  = quizer_quizzes_url(s: @quizer_quiz.audience_secret)
+.btn-group.mb-2
+  = link_to quizer_quiz_questions_url(@quizer_quiz), class: 'btn btn-primary' do
+    | Quiz questions
+    span.badge.text-bg-secondary = @quizer_quiz.questions.count
+
+  = link_to "Edit description", edit_quizer_quiz_path(@quizer_quiz), class: 'btn btn-secondary'
+
+  = link_to "See the results", results_quizer_quizzes_path(s: @quizer_quiz.audience_secret), class: 'btn btn-success'
+
+.card
+  .card-body
+    p Save this link to return to this page and edit the quiz or go to the results:
+    .input-group.mb-3
+      = text_field_tag 'owner-link', url_for([@quizer_quiz, { only_path: false }]), class: 'form-control'
+      span.input-group-text
+        = link_to 'Copy', '#', class: 'clipboard', data: { clipboard_target: '#owner-link' }
+    =
+.card.my-2
+  .card-body
+    p When finished creating your questions, send this link to your audience:
+    = quizer_quizzes_url(s: @quizer_quiz.audience_secret)
+
 = render @quizer_quiz
+
 p
-  = link_to "Questions", quizer_quiz_questions_url(@quizer_quiz)
-p
-  = link_to "Results", results_quizer_quizzes_path(s: @quizer_quiz.audience_secret)
-div
-  = link_to "Edit this quiz", edit_quizer_quiz_path(@quizer_quiz)
-  = button_to "Destroy this quiz", @quizer_quiz, method: :delete
+  = button_to "Delete quiz", @quizer_quiz,
+    method: :delete,
+    class: 'btn btn-danger btn-sm',
+    data: { turbo_confirm: 'Are you sure you want to delete this quiz?' }
