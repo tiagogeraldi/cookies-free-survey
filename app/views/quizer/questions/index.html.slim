@@ -1,0 +1,10 @@
+p[style="color: green"]
+  = notice
+h1
+  | Questions
+#quizer_questions
+  - @questions.each do |question|
+    = render question
+    p
+      = link_to "Show this question", quizer_quiz_question_path(@quiz, question)
+= link_to "New question", new_quizer_quiz_question_path(@quiz)

@@ -1,0 +1,16 @@
+p[style="color: green"]
+  = notice
+p
+  |  Save this link to return and edit the Quiz and watch the results: 
+  = url_for [@quizer_quiz, { only_path: false }]
+p
+  |  Send this link to your audience 
+  = quizer_quizzes_url(s: @quizer_quiz.audience_secret)
+= render @quizer_quiz
+p
+  = link_to "Questions", quizer_quiz_questions_url(@quizer_quiz)
+p
+  = link_to "Results", results_quizer_quizzes_path(s: @quizer_quiz.audience_secret)
+div
+  = link_to "Edit this quiz", edit_quizer_quiz_path(@quizer_quiz)
+  = button_to "Destroy this quiz", @quizer_quiz, method: :delete
