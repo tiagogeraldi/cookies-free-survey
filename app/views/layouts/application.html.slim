@@ -22,6 +22,8 @@ html
 
     .container-sm
       - if notice
-        .alert.alert-success.my-2 = notice
+        .alert.alert-success.alert-dismissible.fade.show.my-2 role="alert"
+          = notice
+          button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
       .mt-3
         = yield
