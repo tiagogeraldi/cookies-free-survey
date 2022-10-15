@@ -4,24 +4,24 @@
       class: 'btn btn-primary'
   - else
     = link_to quizer_quiz_questions_url(@quizer_quiz), class: 'btn btn-primary' do
-      | Quiz questions
-      span.badge.text-bg-secondary = @quizer_quiz.questions.count
+      | Quiz questions &nbsp
+      span.badge.text-bg-light = @quizer_quiz.questions.count
 
-  = link_to "Edit description", edit_quizer_quiz_path(@quizer_quiz), class: 'btn btn-secondary'
-
-  = link_to "See the results", results_quizer_quizzes_path(s: @quizer_quiz.audience_secret), class: 'btn btn-success'
+  = link_to "Answers", results_quizer_quizzes_path(s: @quizer_quiz.audience_secret), class: 'btn btn-success'
 
 .row
-  .col-6
+  .col-md-6.col-sm-12.mt-2
     .card
+      .card-header Owner link
       .card-body
         p Save this link to return to this page and edit the quiz or go to the results:
         .input-group.mb-3
           = text_field_tag 'owner-link', url_for([@quizer_quiz, { only_path: false }]), readonly: true, class: 'form-control'
           span.input-group-text
             = link_to 'Copy', '#', class: 'clipboard', data: { clipboard_target: '#owner-link' }
-  .col-6
+  .col-md-6.col-sm-12.mt-2
     .card
+      .card-header Audience Link
       .card-body
         p When finished creating your questions, send this link to your audience:
         .input-group.mb-3
@@ -32,7 +32,7 @@
 
 = render @quizer_quiz
 
-p
+p.mt-5
   = button_to "Delete quiz", @quizer_quiz,
     method: :delete,
     class: 'btn btn-danger btn-sm',

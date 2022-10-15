@@ -1,8 +1,4 @@
-h1
-  | Editing quiz
+p= link_to "< Back", @quizer_quiz, class: 'btn btn-light btn-sm'
+
+h1 Editing quiz
 = render "form", quizer_quiz: @quizer_quiz
-br
-div
-  = link_to "Show this quiz", @quizer_quiz
-  |  | 
-  = link_to "Back to quizzes", quizer_quizzes_path

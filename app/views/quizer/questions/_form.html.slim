@@ -2,8 +2,11 @@
   .alert.alert-warning
     = question.errors.full_messages.join('. ')
 .my-4
-  = form.label :description, class: 'form-label'
-
-  = form.text_area :description, class: 'form-control'
+  = form.label :question_type, class: 'form-label'
+  = form.select :question_type, ['alternatives', 'descriptive'], {},
+    { class: 'form-select' }
+.my-4
+  = form.label :description, 'Question', class: 'form-label'
+  = form.text_area :description, class: 'form-control', rows: 7
 
 = form.submit class: 'btn btn-primary'

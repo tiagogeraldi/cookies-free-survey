@@ -7,10 +7,6 @@ class Quizer::QuestionsController < ApplicationController
     @questions = @quiz.questions
   end
 
-  # GET /quizer/questions/1
-  def show
-  end
-
   # GET /quizer/questions/new
   def new
     @question = @quiz.questions.new
@@ -25,7 +21,7 @@ class Quizer::QuestionsController < ApplicationController
     @question = @quiz.questions.new(quizer_question_params)
 
     if @question.save
-      redirect_to quizer_quiz_question_url(@quiz, @question), notice: "Question was successfully created."
+      redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +30,7 @@ class Quizer::QuestionsController < ApplicationController
   # PATCH/PUT /quizer/questions/1
   def update
     if @question.update(quizer_question_params)
-      redirect_to quizer_quiz_question_url(@quiz, @question), notice: "Question was successfully updated."
+      redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

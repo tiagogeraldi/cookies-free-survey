@@ -1,7 +1,6 @@
-| <div id="
-= dom_id quiz
-| "> 
-p
-  strong
-    | Description:
-  = quiz.description
+.card.my-4 id=dom_id(quiz)
+  .card-header Description
+  .card-body
+    = simple_format quiz.description
+
+    = link_to "Edit description", edit_quizer_quiz_path(quiz), class: 'btn btn-sm btn-secondary'
