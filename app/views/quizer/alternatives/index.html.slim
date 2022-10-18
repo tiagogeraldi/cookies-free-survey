@@ -1,0 +1,11 @@
+p = link_to "< Back", quizer_quiz_questions_path(@quiz), class: 'btn btn-light btn-sm'
+
+h2 Alternatives
+
+table.table#quizer_alternatives
+  - @alternatives.each do |alternative|
+    = render alternative
+
+= link_to "New alternative",
+  new_quizer_quiz_question_alternative_path(@quiz, @question),
+  class: 'btn btn-primary'

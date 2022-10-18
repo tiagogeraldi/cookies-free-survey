@@ -5,7 +5,9 @@ Rails.application.routes.draw do
         get :results
       end
 
-      resources :questions
+      resources :questions, except: :show do
+        resources :alternatives, except: :show
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

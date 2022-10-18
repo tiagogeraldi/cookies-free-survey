@@ -1,6 +1,6 @@
 class Quizer::QuestionsController < ApplicationController
   before_action :set_quiz
-  before_action :set_quizer_question, only: %i[ show edit update destroy ]
+  before_action :set_quizer_question, only: %i[ edit update destroy ]
 
   # GET /quizer/questions
   def index

@@ -1,5 +1,7 @@
 class Quizer::Quiz < ApplicationRecord
-  has_many :questions, dependent: :destroy, class_name: 'Quizer::Question', foreign_key: :quizer_quiz_id
+  has_many :questions, dependent: :destroy,
+           class_name: 'Quizer::Question', foreign_key: :quizer_quiz_id,
+           dependent: :destroy
 
   validates :description, presence: true
 

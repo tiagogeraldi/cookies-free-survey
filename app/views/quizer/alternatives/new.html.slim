@@ -1,0 +1,6 @@
+p = link_to "< Back", quizer_quiz_question_alternatives_path(@quiz), class: 'btn btn-light btn-sm'
+
+
+h2 New alternative
+= form_with(model: [@quiz, @question, @alternative], url: quizer_quiz_questions_path) do |form|
+  = render "form", alternative: @alternative, form: form

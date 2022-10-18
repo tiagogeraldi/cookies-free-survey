@@ -1,5 +1,8 @@
 class Quizer::Question < ApplicationRecord
-  belongs_to :quizer_quiz, class_name: 'Quizer::Quiz'
+  belongs_to :quiz, class_name: 'Quizer::Quiz'
+  has_many :alternatives, class_name: 'Quizer::Alternative',
+           foreign_key: :quizer_question_id,
+           dependent: :destroy
 
   validates :description, presence: true
 

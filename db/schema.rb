@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_145816) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_18_001552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "quizer_alternatives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "quizer_question_id", null: false
+    t.text "description"
+    t.boolean "correct", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quizer_question_id"], name: "index_quizer_alternatives_on_quizer_question_id"
+  end
 
   create_table "quizer_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "quizer_quiz_id", null: false
@@ -35,5 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_145816) do
     t.index ["owner_secret"], name: "index_quizer_quizzes_on_owner_secret", unique: true
   end
 
+  add_foreign_key "quizer_alternatives", "quizer_questions"
   add_foreign_key "quizer_questions", "quizer_quizzes"
 end
