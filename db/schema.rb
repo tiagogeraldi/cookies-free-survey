@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_18_001552) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_231552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "quizer_alternatives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "question_id"
+    t.uuid "question_id", null: false
     t.text "description"
     t.boolean "correct", default: false
     t.datetime "created_at", null: false
@@ -24,10 +24,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_001552) do
     t.index ["question_id"], name: "index_quizer_alternatives_on_question_id"
   end
 
+  create_table "quizer_answers", force: :cascade do |t|
+    t.string "session"
+    t.uuid "quiz_id", null: false
+    t.uuid "question_id", null: false
+    t.uuid "alternative_id"
+    t.text "descriptive"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_quizer_answers_on_quiz_id"
+  end
+
   create_table "quizer_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "quiz_id"
-    t.integer "question_type"
-    t.text "description"
+    t.uuid "quiz_id", null: false
+    t.integer "question_type", null: false
+    t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_quizer_questions_on_quiz_id"
@@ -35,8 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_001552) do
 
   create_table "quizer_quizzes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "description"
-    t.string "owner_secret", limit: 20
-    t.string "audience_secret", limit: 20
+    t.string "owner_secret", limit: 20, null: false
+    t.string "audience_secret", limit: 20, null: false
     t.boolean "public_results"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,5 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_001552) do
   end
 
   add_foreign_key "quizer_alternatives", "quizer_questions", column: "question_id"
+  add_foreign_key "quizer_answers", "quizer_alternatives", column: "alternative_id"
+  add_foreign_key "quizer_answers", "quizer_questions", column: "question_id"
+  add_foreign_key "quizer_answers", "quizer_quizzes", column: "quiz_id"
   add_foreign_key "quizer_questions", "quizer_quizzes", column: "quiz_id"
 end

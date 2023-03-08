@@ -1,5 +1,5 @@
-class Quizer::AlternativesController < ApplicationController
-  before_action :set_quiz, :set_question
+class Quizer::AlternativesController < Quizer::BaseController
+  before_action :set_quiz_by_owner_secret, :set_question
   before_action :set_quizer_alternative, only: %i[ edit update destroy ]
 
   # GET /quizer/alternatives
@@ -18,7 +18,7 @@ class Quizer::AlternativesController < ApplicationController
 
   # POST /quizer/alternatives or /quizer/alternatives.json
   def create
-    @alternative = @question.alternatives.new(quizer_alternative_params)
+    @alternative = @question.alternatives.new(alternative_params)
 
     if @alternative.save
       redirect_to quizer_quiz_question_alternatives_url(@quiz, @question), notice: "Alternative was successfully created."
@@ -29,7 +29,7 @@ class Quizer::AlternativesController < ApplicationController
 
   # PATCH/PUT /quizer/alternatives/1
   def update
-    if @alternative.update(quizer_alternative_params)
+    if @alternative.update(alternative_params)
       redirect_to quizer_quiz_question_alternatives_url(@quiz, @question), notice: "Alternative was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -44,9 +44,6 @@ class Quizer::AlternativesController < ApplicationController
   end
 
   private
-    def set_quiz
-      @quiz = Quizer::Quiz.find_by!(owner_secret: params[:quiz_owner_secret])
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_question
@@ -59,7 +56,7 @@ class Quizer::AlternativesController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def quizer_alternative_params
-      params.require(:quizer_alternative).permit(:quizer_question_id, :description, :correct)
+    def alternative_params
+      params.require(:quizer_alternative).permit(:question_id, :description, :correct)
     end
 end

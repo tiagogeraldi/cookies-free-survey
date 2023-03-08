@@ -1,13 +1,13 @@
 .btn-group.mb-2
-  - if @quizer_quiz.questions.count == 0
-    = link_to 'Add a question', new_quizer_quiz_question_path(@quizer_quiz),
+  - if @quiz.questions.count == 0
+    = link_to 'Add a question', new_quizer_quiz_question_path(@quiz),
       class: 'btn btn-primary'
   - else
-    = link_to quizer_quiz_questions_url(@quizer_quiz), class: 'btn btn-primary' do
+    = link_to quizer_quiz_questions_url(@quiz), class: 'btn btn-primary' do
       | Quiz questions &nbsp
-      span.badge.text-bg-light = @quizer_quiz.questions.count
+      span.badge.text-bg-light = @quiz.questions.count
 
-  = link_to "Answers", results_quizer_quizzes_path(s: @quizer_quiz.audience_secret), class: 'btn btn-success'
+  = link_to "Answers", results_quizer_quizzes_path(s: @quiz.audience_secret), class: 'btn btn-success'
 
 .row
   .col-md-6.col-sm-12.mt-2
@@ -16,7 +16,7 @@
       .card-body
         p Save this link to return to this page and edit the quiz or go to the results:
         .input-group.mb-3
-          = text_field_tag 'owner-link', url_for([@quizer_quiz, { only_path: false }]), readonly: true, class: 'form-control'
+          = text_field_tag 'owner-link', url_for([@quiz, { only_path: false }]), readonly: true, class: 'form-control'
           span.input-group-text
             = link_to 'Copy', '#', class: 'clipboard', data: { clipboard_target: '#owner-link' }
   .col-md-6.col-sm-12.mt-2
@@ -25,15 +25,15 @@
       .card-body
         p When finished creating your questions, send this link to your audience:
         .input-group.mb-3
-          = text_field_tag 'audience-link', quizer_quizzes_url(s: @quizer_quiz.audience_secret,
+          = text_field_tag 'audience-link', quizer_answers_url(s: @quiz.audience_secret,
             only_path: false), readonly: true, class: 'form-control'
           span.input-group-text
             = link_to 'Copy', '#', class: 'clipboard', data: { clipboard_target: '#audience-link' }
 
-= render @quizer_quiz
+= render @quiz
 
 p.mt-5
-  = button_to "Delete quiz", @quizer_quiz,
+  = button_to "Delete quiz", @quiz,
     method: :delete,
     class: 'btn btn-danger btn-sm',
     data: { turbo_confirm: 'Are you sure you want to delete this quiz?' }

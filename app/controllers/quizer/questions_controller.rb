@@ -1,6 +1,6 @@
-class Quizer::QuestionsController < ApplicationController
-  before_action :set_quiz
-  before_action :set_quizer_question, only: %i[ edit update destroy ]
+class Quizer::QuestionsController < Quizer::BaseController
+  before_action :set_quiz_by_owner_secret
+  before_action :set_question, only: %i[ edit update destroy ]
 
   # GET /quizer/questions
   def index
@@ -18,7 +18,7 @@ class Quizer::QuestionsController < ApplicationController
 
   # POST /quizer/questions
   def create
-    @question = @quiz.questions.new(quizer_question_params)
+    @question = @quiz.questions.new(question_params)
     if @question.save
       redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."
     else
@@ -28,7 +28,7 @@ class Quizer::QuestionsController < ApplicationController
 
   # PATCH/PUT /quizer/questions/1
   def update
-    if @question.update(quizer_question_params)
+    if @question.update(question_params)
       redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -43,17 +43,14 @@ class Quizer::QuestionsController < ApplicationController
   end
 
   private
-    def set_quiz
-      @quiz = Quizer::Quiz.find_by!(owner_secret: params[:quiz_owner_secret])
-    end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_quizer_question
+    def set_question
       @question = @quiz.questions.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def quizer_question_params
+    def question_params
       params.require(:quizer_question).permit(:quiz_id, :question_type, :description)
     end
 end

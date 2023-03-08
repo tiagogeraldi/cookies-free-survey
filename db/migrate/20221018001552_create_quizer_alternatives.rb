@@ -1,7 +1,7 @@
 class CreateQuizerAlternatives < ActiveRecord::Migration[7.0]
   def change
     create_table :quizer_alternatives, id: :uuid do |t|
-      t.uuid :question_id
+      t.uuid :question_id, null: false
       t.text :description
       t.boolean :correct, default: false
 

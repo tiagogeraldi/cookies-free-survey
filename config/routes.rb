@@ -9,6 +9,8 @@ Rails.application.routes.draw do
         resources :alternatives, except: :show
       end
     end
+
+    resources :answers, only: %i(index create update)
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
