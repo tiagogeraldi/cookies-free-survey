@@ -16,21 +16,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_001552) do
   enable_extension "plpgsql"
 
   create_table "quizer_alternatives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "quizer_question_id", null: false
+    t.uuid "question_id"
     t.text "description"
     t.boolean "correct", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["quizer_question_id"], name: "index_quizer_alternatives_on_quizer_question_id"
+    t.index ["question_id"], name: "index_quizer_alternatives_on_question_id"
   end
 
   create_table "quizer_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "quizer_quiz_id", null: false
+    t.uuid "quiz_id"
     t.integer "question_type"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["quizer_quiz_id"], name: "index_quizer_questions_on_quizer_quiz_id"
+    t.index ["quiz_id"], name: "index_quizer_questions_on_quiz_id"
   end
 
   create_table "quizer_quizzes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -44,6 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_001552) do
     t.index ["owner_secret"], name: "index_quizer_quizzes_on_owner_secret", unique: true
   end
 
-  add_foreign_key "quizer_alternatives", "quizer_questions"
-  add_foreign_key "quizer_questions", "quizer_quizzes"
+  add_foreign_key "quizer_alternatives", "quizer_questions", column: "question_id"
+  add_foreign_key "quizer_questions", "quizer_quizzes", column: "quiz_id"
 end
