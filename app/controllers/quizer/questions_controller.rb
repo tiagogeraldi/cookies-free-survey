@@ -19,7 +19,6 @@ class Quizer::QuestionsController < ApplicationController
   # POST /quizer/questions
   def create
     @question = @quiz.questions.new(quizer_question_params)
-
     if @question.save
       redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."
     else
