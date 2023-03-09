@@ -3,6 +3,10 @@ class Quizer::Quiz < ApplicationRecord
            class_name: 'Quizer::Question',
            dependent: :destroy
 
+  has_many :answers, dependent: :destroy,
+           class_name: 'Quizer::Answer',
+           dependent: :destroy
+
   validates :description, presence: true
 
   def generate_secrets

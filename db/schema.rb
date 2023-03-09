@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_231552) do
   end
 
   create_table "quizer_answers", force: :cascade do |t|
-    t.string "session"
+    t.string "session_hex"
     t.uuid "quiz_id", null: false
     t.uuid "question_id", null: false
     t.uuid "alternative_id"

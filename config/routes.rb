@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :answers, only: %i(index create update)
+    resources :answers, only: %i(index new create update)
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,4 +1,9 @@
 | Answers
 
-p = @quiz
+p = @quiz.description
 p = @session_hex
+
+- if @quiz.questions.present?
+  = link_to 'Start Survey',
+    new_quizer_answer_path(s: @quiz.audience_secret, question_id: @quiz.questions.first.id, session_hex: @session_hex),
+    class: 'btn btn-lg btn-primary'
