@@ -22,6 +22,7 @@ class Quizer::QuestionsController < Quizer::BaseController
     if @question.save
       redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."
     else
+      flash.now[:error] = @question.errors.full_messages.join('. ')
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,6 +32,7 @@ class Quizer::QuestionsController < Quizer::BaseController
     if @question.update(question_params)
       redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully updated."
     else
+      flash.now[:error] = @question.errors.full_messages.join('. ')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -51,6 +53,6 @@ class Quizer::QuestionsController < Quizer::BaseController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:quizer_question).permit(:quiz_id, :question_type, :description)
+      params.require(:quizer_question).permit(:quiz_id, :question_type, :description, :position)
     end
 end

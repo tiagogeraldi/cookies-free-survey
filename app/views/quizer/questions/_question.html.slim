@@ -2,7 +2,7 @@
   .card
     .card-header
       .d-flex.justify-content-between
-        - if question.alternatives?
+        - if !question.descriptive?
           = link_to quizer_quiz_question_alternatives_url(@quiz, question), class: 'btn btn-sm btn-primary' do
             | Answer alternatives &nbsp
             span.badge.text-bg-light = question.alternatives.count

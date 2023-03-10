@@ -1,0 +1,6 @@
+- question.alternatives.each.with_index do |alternative, i|
+  .form-check
+    = f.radio_button :alternative_ids, alternative.id, class: 'form-check-input'
+    label.form-check-label
+     strong.me-3 =  i + 1
+     span = alternative.description

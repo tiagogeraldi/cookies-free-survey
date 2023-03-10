@@ -4,11 +4,11 @@ class Quizer::Question < ApplicationRecord
   has_many :alternatives, class_name: 'Quizer::Alternative',
            dependent: :destroy
 
-    has_many :answers, dependent: :destroy,
+  has_many :answers, dependent: :destroy,
            class_name: 'Quizer::Answer',
            dependent: :destroy
 
-  validates :description, presence: true
+  validates :description, :position, presence: true
 
-  enum :question_type, %i(alternatives descriptive)
+  enum :question_type, %i(select_one select_one_or_more descriptive)
 end

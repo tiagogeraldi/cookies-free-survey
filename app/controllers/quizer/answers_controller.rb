@@ -1,5 +1,6 @@
 class Quizer::AnswersController < Quizer::BaseController
   before_action :set_quiz_by_audience_secret
+  before_action :set_question, only: %i(new create update edit)
 
   def index
     @session_hex = SecureRandom.hex(10)
@@ -10,27 +11,68 @@ class Quizer::AnswersController < Quizer::BaseController
   end
 
   def new
-    @question = Quizer::Question.find(params[:question_id])
     @session_hex = params[:session_hex]
     @answer = Quizer::Answer.new
 
-    if @question.alternatives.blank?
+    if !@question.descriptive? && @question.alternatives.blank?
       flash.now[:error] = "This question has no alternatives"
     end
   end
 
+  def edit
+  end
+
   def create
-    # add quiz as attribute
+    @answer = @quiz.answers.new(answer_params)
+    @answer.question = @question
+
+    if @answer.save
+      redirect_to_next_question
+    else
+      flash.now[:error] = @answer.errors.full_messages.join('. ')
+      # redirect_to new_quizer_answer_path(
+      #   s: params[:s],
+      #   session_hex: answer_params[:session_hex],
+      #   question_id: answer_params[:question_id]
+      # )
+      render action: :new
+    end
   end
 
   # When navigate back to previous question and save again
   def update
   end
 
+  def thankyou
+  end
+
   private
 
-    # Only allow a list of trusted parameters through.
-    def answer_params
-      params.require(:quizer_answer).permit(:quiz_id, :question_id, :session_hex, :alternative_id, :descriptive)
+  def redirect_to_next_question
+    if next_question
+      redirect_to new_quizer_answer_path(
+        s: params[:s],
+        session_hex: answer_params[:session_hex],
+        question_id: next_question.id
+      )
+    else
+      redirect_to thankyou_quizer_answers_path(s: params[:s])
     end
+  end
+
+  def next_question
+    @quiz.questions.order(:position).where('position > ?', @answer.question.position).first
+  end
+
+  def set_question
+    @question = Quizer::Question.find(params[:question_id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def answer_params
+    params.require(:quizer_answer).permit(
+      :quiz_id, :session_hex, :descriptive,
+      alternative_ids: []
+    )
+  end
 end

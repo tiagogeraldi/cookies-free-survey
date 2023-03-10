@@ -10,7 +10,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :answers, only: %i(index new create update)
+    resources :answers, except: :destroy do
+      collection do
+        get :thankyou
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

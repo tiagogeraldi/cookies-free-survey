@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_231552) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_214434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -24,11 +24,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_231552) do
     t.index ["question_id"], name: "index_quizer_alternatives_on_question_id"
   end
 
-  create_table "quizer_answers", force: :cascade do |t|
+  create_table "quizer_answer_alternatives", force: :cascade do |t|
+    t.uuid "answer_id", null: false
+    t.uuid "alternative_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quizer_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "session_hex"
     t.uuid "quiz_id", null: false
     t.uuid "question_id", null: false
-    t.uuid "alternative_id"
     t.text "descriptive"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -39,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_231552) do
     t.uuid "quiz_id", null: false
     t.integer "question_type", null: false
     t.text "description", null: false
+    t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_quizer_questions_on_quiz_id"
@@ -56,7 +63,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_231552) do
   end
 
   add_foreign_key "quizer_alternatives", "quizer_questions", column: "question_id"
-  add_foreign_key "quizer_answers", "quizer_alternatives", column: "alternative_id"
+  add_foreign_key "quizer_answer_alternatives", "quizer_alternatives", column: "alternative_id"
+  add_foreign_key "quizer_answer_alternatives", "quizer_answers", column: "answer_id"
   add_foreign_key "quizer_answers", "quizer_questions", column: "question_id"
   add_foreign_key "quizer_answers", "quizer_quizzes", column: "quiz_id"
   add_foreign_key "quizer_questions", "quizer_quizzes", column: "quiz_id"

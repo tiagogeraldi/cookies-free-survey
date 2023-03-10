@@ -1,0 +1,6 @@
+- question.alternatives.each.with_index do |alternative, i|
+  .form-check
+    = f.check_box :alternative_ids, { multiple: true, class: 'form-check-input' }, alternative.id, nil
+    label.form-check-label
+     strong.me-3 =  i + 1
+     span = alternative.description
