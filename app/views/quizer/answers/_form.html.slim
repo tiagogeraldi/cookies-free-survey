@@ -1,8 +1,4 @@
 = form_with(model: answer, url: quizer_answers_path(s: quiz.audience_secret, question_id: question.id)) do |f|
-  - if quiz.errors.any?
-    .alert.alert-warning
-      = quiz.errors.full_messages.join('. ')
-
   = f.hidden_field :session_hex, value: session_hex
 
   h4 = question.description

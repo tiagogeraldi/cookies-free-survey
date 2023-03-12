@@ -7,7 +7,23 @@ class Quizer::Answer < ApplicationRecord
   has_many :alternatives, through: :answer_alternatives, class_name: 'Quizer::Alternative'
 
   validates :session_hex, :quiz, :question, presence: true
+  validates :descriptive, presence: true, if: :descriptive?
 
-  # TODO
-  # validate at least one alternative
+  validate :at_least_one_alternative
+
+  private
+
+  def descriptive?
+    question.descriptive?
+  end
+
+  def at_least_one_alternative
+    if alternatives.blank?
+      if question.select_one?
+        errors.add :base, 'Select one alternative'
+      elsif question.select_one_or_more?
+        errors.add :base, 'Select one or more alternatives'
+      end
+    end
+  end
 end

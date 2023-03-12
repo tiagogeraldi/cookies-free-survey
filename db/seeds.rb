@@ -8,6 +8,8 @@
 
 puts "Creating a survey..."
 
+Quizer::Quiz.destroy_all
+
 quiz = Quizer::Quiz.new description: Faker::Quotes::Shakespeare.hamlet_quote
 quiz.generate_secrets
 quiz.save!
