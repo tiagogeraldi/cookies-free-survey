@@ -1,0 +1,10 @@
+| Thank you
+
+.card
+      .card-header Share this survey
+      .card-body
+        .input-group.mb-3
+          = text_field_tag 'audience-link', quizer_answers_url(s: @quiz.audience_secret,
+            only_path: false), readonly: true, class: 'form-control'
+          span.input-group-text
+            = link_to 'Copy', '#', class: 'clipboard', data: { clipboard_target: '#audience-link' }

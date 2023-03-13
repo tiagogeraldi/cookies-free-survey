@@ -1,29 +1,30 @@
 class Quizer::AnswersController < Quizer::BaseController
   before_action :set_quiz_by_audience_secret
-  before_action :set_question, :set_session_hex, except: %i(index thankyou)
+  before_action :set_question, :set_session_hex, except: %i(index done)
 
   def index
     @session_hex = SecureRandom.hex(10)
+    questions = @quiz.questions.order(:position)
 
-    if @quiz.questions.blank?
+    if questions.any?
+      @question = questions.first
+    else
       flash.now[:error] = "This survey has no questions"
     end
   end
 
   def new
-    @answer = Quizer::Answer.new
+    @answer = @question.answers.find_or_initialize_by(session_hex: @session_hex)
 
     if !@question.descriptive? && @question.alternatives.blank?
       flash.now[:error] = "This question has no alternatives"
     end
   end
 
-  def edit
-  end
-
-  def create
-    @answer = @quiz.answers.new(answer_params)
-    @answer.question = @question
+  def upsert
+    @answer = @question.answers.find_or_initialize_by(session_hex: @session_hex)
+    @answer.quiz = @quiz
+    @answer.assign_attributes(answer_params)
 
     if @answer.save
       redirect_to_next_question
@@ -33,29 +34,21 @@ class Quizer::AnswersController < Quizer::BaseController
     end
   end
 
-  # When navigate back to previous question and save again
-  def update
-  end
-
-  def thankyou
+  def done
   end
 
   private
 
   def redirect_to_next_question
-    if next_question
+    if @question.next_question
       redirect_to new_quizer_answer_path(
         s: params[:s],
         session_hex: answer_params[:session_hex],
-        question_id: next_question.id
+        question_id: @question.next_question.id
       )
     else
-      redirect_to thankyou_quizer_answers_path(s: params[:s])
+      redirect_to done_quizer_answers_path(s: params[:s])
     end
-  end
-
-  def next_question
-    @quiz.questions.order(:position).where('position > ?', @answer.question.position).first
   end
 
   def set_question

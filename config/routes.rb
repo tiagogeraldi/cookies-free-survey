@@ -10,9 +10,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :answers, except: :destroy do
+    resources :answers, only: %i(index new) do
       collection do
-        get :thankyou
+        post :upsert
+        get :done
       end
     end
   end

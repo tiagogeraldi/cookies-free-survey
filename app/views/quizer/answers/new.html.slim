@@ -1,1 +1,20 @@
-= render "form", answer: @answer, quiz: @quiz, session_hex: @session_hex, question: @question
+= form_with(model: Quizer::Answer.new, url: upsert_quizer_answers_path(s: @quiz.audience_secret, question_id: @question.id)) do |f|
+  = f.hidden_field :session_hex, value: @session_hex
+
+  h4 = @question.description
+
+  = render partial: @question.question_type, locals: { f: f, question: @question, answer: @answer }
+
+  .btn-group
+    - if @question.prev_question
+      = link_to 'Prev', new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.prev_question.id, session_hex: @session_hex),
+        class: 'btn btn-secondary'
+    - if @question.next_question
+      = link_to 'Next',
+        new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.next_question.id, session_hex: @session_hex),
+        class: 'btn btn-secondary'
+    - else
+      = link_to 'Next', done_quizer_answers_path(s: @quiz.audience_secret),
+        class: 'btn btn-secondary'
+
+    = f.submit 'Answer', class: 'btn btn-primary'

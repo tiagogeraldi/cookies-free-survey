@@ -1,8 +1,0 @@
-= form_with(model: answer, url: quizer_answers_path(s: quiz.audience_secret, question_id: question.id)) do |f|
-  = f.hidden_field :session_hex, value: session_hex
-
-  h4 = question.description
-
-  = render partial: question.question_type, locals: { f: f, question: question }
-
-  = f.submit 'Answer', class: 'btn btn-primary'

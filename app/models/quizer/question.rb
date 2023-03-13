@@ -11,4 +11,12 @@ class Quizer::Question < ApplicationRecord
   validates :description, :position, presence: true
 
   enum :question_type, %i(select_one select_one_or_more descriptive)
+
+  def prev_question
+    quiz.questions.order(:position).where('position < ?', position).last
+  end
+
+  def next_question
+    quiz.questions.order(:position).where('position > ?', position).first
+  end
 end
