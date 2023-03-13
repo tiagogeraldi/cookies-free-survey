@@ -9,6 +9,7 @@ class Quizer::Question < ApplicationRecord
            dependent: :destroy
 
   validates :description, :position, presence: true
+  validates :position, uniqueness: { scope: :quiz_id }
 
   enum :question_type, %i(select_one select_one_or_more descriptive)
 
