@@ -9,6 +9,10 @@
 
   = link_to "Results", quizer_quiz_results_path(@quiz), class: 'btn btn-success'
 
+  = link_to "Clone survey", clone_quizer_quiz_path(@quiz),
+    class: 'btn btn-secondary',
+    target: '_blank'
+
 .row
   .col-md-6.col-sm-12.mt-2
     .card

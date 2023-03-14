@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   namespace :quizer do
     resources :quizzes, param: :owner_secret do
+      member do
+        get :clone
+      end
+
       resources :questions, except: :show do
         resources :alternatives, except: :show
       end

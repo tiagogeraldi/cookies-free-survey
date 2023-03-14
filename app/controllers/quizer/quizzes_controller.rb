@@ -1,5 +1,5 @@
 class Quizer::QuizzesController < Quizer::BaseController
-  before_action :set_quiz_by_owner_secret, only: %i(show results edit destroy update)
+  before_action :set_quiz_by_owner_secret, only: %i(show results edit destroy update clone)
 
   # GET /quizer/quizzes
   def index
@@ -7,9 +7,6 @@ class Quizer::QuizzesController < Quizer::BaseController
 
   # GET /quizer/quizzes/1
   def show
-    if @quiz.answers.blank?
-      flash.now[:error] = "Nobody has answered your survey so far"
-    end
   end
 
   def results
@@ -54,6 +51,24 @@ class Quizer::QuizzesController < Quizer::BaseController
     @quiz.destroy
 
     redirect_to quizer_quizzes_url, notice: "Quiz was successfully destroyed."
+  end
+
+  def clone
+    cloned = @quiz.dup
+    cloned.generate_secrets
+    cloned.save!
+
+    @quiz.questions.includes(:alternatives).find_each do |question|
+      cloned_question = question.dup
+      cloned_question.quiz = cloned
+      cloned_question.save!
+
+      question.alternatives.find_each do |alternative|
+        cloned_question.alternatives << alternative.dup
+      end
+    end
+
+    redirect_to quizer_quiz_url(cloned), notice: "Survey was successfully cloned."
   end
 
   private

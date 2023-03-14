@@ -2,6 +2,10 @@ class Quizer::ResultsController < Quizer::BaseController
   before_action :set_quiz_by_owner_secret
 
   def index
+    if @quiz.answers.blank?
+      flash.now[:error] = "Nobody has answered your survey so far"
+    end
+
     @total_people = @quiz.answers.count_by_session
     @total_questions = @quiz.questions.count
   end
