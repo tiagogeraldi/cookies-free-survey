@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   namespace :quizer do
     resources :quizzes, param: :owner_secret do
-      member do
-        get :results
-      end
-
       resources :questions, except: :show do
         resources :alternatives, except: :show
+      end
+
+      resources :results, only: %i(index show) do
+        collection do
+          get :logs
+        end
       end
     end
 

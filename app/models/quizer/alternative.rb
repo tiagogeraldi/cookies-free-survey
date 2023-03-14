@@ -5,4 +5,12 @@ class Quizer::Alternative < ApplicationRecord
   has_many :answers, through: :answer_alternatives, class_name: 'Quizer::Answer'
 
   validates :description, presence: true
+
+  def answers_count
+    @answers_count ||= answers.count
+  end
+
+  def percentage
+     answers_count.to_f * 100 / question.answers_count.to_f
+  end
 end

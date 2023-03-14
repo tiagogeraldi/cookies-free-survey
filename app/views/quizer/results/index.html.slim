@@ -1,0 +1,15 @@
+p = link_to "< Home", quizer_quiz_path(@quiz), class: 'btn btn-light btn-sm'
+p = link_to "All answers", logs_quizer_quiz_results_path(@quiz), class: 'btn btn-light btn-sm'
+
+h3
+  | #{pluralize @total_people, 'person'} have answered your survey across #{pluralize @total_questions, 'question'}.
+
+h4 Questions
+table.table.table-striped
+  - @quiz.questions.each do |question|
+    tr
+      td = question.description
+      td
+        = link_to 'Details',
+          quizer_quiz_result_path(@quiz, question),
+          class: 'btn btn-sm btn-success'

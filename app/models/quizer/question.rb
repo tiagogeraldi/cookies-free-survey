@@ -20,4 +20,8 @@ class Quizer::Question < ApplicationRecord
   def next_question
     quiz.questions.order(:position).where('position > ?', position).first
   end
+
+  def answers_count
+    @answers_count ||= answers.count
+  end
 end

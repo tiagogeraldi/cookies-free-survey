@@ -31,11 +31,13 @@ end
 
 # 10 people answered the survey
 10.times do
+  session_hex = SecureRandom.hex(10)
+
   quiz.questions.each do |question|
     answer = Quizer::Answer.new(
       quiz: quiz,
       question: question,
-      session_hex: SecureRandom.hex(10)
+      session_hex: session_hex
     )
     if !question.descriptive?
       answer.alternatives << question.alternatives.sample

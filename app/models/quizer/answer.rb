@@ -1,7 +1,6 @@
 class Quizer::Answer < ApplicationRecord
   belongs_to :quiz
   belongs_to :question
-  belongs_to :alternative, required: false
 
   has_many :answer_alternatives, class_name: 'Quizer::AnswerAlternative', dependent: :destroy
   has_many :alternatives, through: :answer_alternatives, class_name: 'Quizer::Alternative'
@@ -10,6 +9,10 @@ class Quizer::Answer < ApplicationRecord
   validates :descriptive, presence: true, if: :descriptive?
 
   validate :at_least_one_alternative
+
+  scope :count_by_session, -> {
+    count('DISTINCT session_hex')
+  }
 
   private
 
