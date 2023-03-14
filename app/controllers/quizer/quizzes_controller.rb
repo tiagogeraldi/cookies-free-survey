@@ -33,6 +33,7 @@ class Quizer::QuizzesController < Quizer::BaseController
     if @quiz.save
       redirect_to quizer_quiz_url(@quiz), notice: "Quiz was successfully created."
     else
+      flash.now[:error] = @quiz.errors.full_messages.join('. ')
       render :new, status: :unprocessable_entity
     end
   end
@@ -42,6 +43,7 @@ class Quizer::QuizzesController < Quizer::BaseController
     if @quiz.update(quiz_params)
       redirect_to quizer_quiz_url(@quiz), notice: "Quiz was successfully updated."
     else
+      flash.now[:error] = @quiz.errors.full_messages.join('. ')
       render :edit, status: :unprocessable_entity
     end
   end

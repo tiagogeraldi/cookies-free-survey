@@ -23,6 +23,7 @@ class Quizer::AlternativesController < Quizer::BaseController
     if @alternative.save
       redirect_to quizer_quiz_question_alternatives_url(@quiz, @question), notice: "Alternative was successfully created."
     else
+      flash.now[:error] = @alternative.errors.full_messages.join('. ')
       render :new, status: :unprocessable_entity
     end
   end
@@ -32,6 +33,7 @@ class Quizer::AlternativesController < Quizer::BaseController
     if @alternative.update(alternative_params)
       redirect_to quizer_quiz_question_alternatives_url(@quiz, @question), notice: "Alternative was successfully updated."
     else
+      flash.now[:error] = @alternative.errors.full_messages.join('. ')
       render :edit, status: :unprocessable_entity
     end
   end
