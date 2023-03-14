@@ -1,5 +1,5 @@
 class Quizer::QuizzesController < Quizer::BaseController
-  before_action :set_quiz_by_owner_secret, only: %i(show edit destroy update)
+  before_action :set_quiz_by_owner_secret, only: %i(show results edit destroy update)
 
   # GET /quizer/quizzes
   def index
@@ -7,10 +7,16 @@ class Quizer::QuizzesController < Quizer::BaseController
 
   # GET /quizer/quizzes/1
   def show
+    if @quiz.answers.blank?
+      flash.now[:error] = "Nobody has answered your survey so far"
+    end
   end
 
   def results
-    set_quiz_by_audience_secret
+    @answers = @quiz.answers.
+      includes(:alternatives, :quiz, :question).
+      order(created_at: :desc).
+      paginate(page: params[:page], per_page: 30)
   end
 
   # GET /quizer/quizzes/new

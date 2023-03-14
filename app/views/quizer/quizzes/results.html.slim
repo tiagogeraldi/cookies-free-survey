@@ -1,1 +1,27 @@
-| Results 
+p = link_to "< Home", quizer_quiz_path(@quiz), class: 'btn btn-light btn-sm'
+
+h2 Results
+
+table.table.table-striped.table-sm
+  tr
+    th Quiz
+    th Question
+    th Answer
+    th ID
+    th When
+  - @answers.find_each do |answer|
+    tr
+      td = link_to answer.quiz_id, answer.quiz, target: '_blank'
+      td = answer.question.description
+      td
+        p
+          = answer.alternatives.map { |a| word_wrap(a.description, line_width: 4) }.join('<br />').html_safe
+
+        - if answer.descriptive.present?
+          p = answer.descriptive
+
+      td = answer.session_hex
+      td =l answer.created_at
+
+.digg_pagination
+  = will_paginate @answers, :container => false

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :quizer do
     resources :quizzes, param: :owner_secret do
-      collection do
+      member do
         get :results
       end
 
