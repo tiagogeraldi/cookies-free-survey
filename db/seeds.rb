@@ -8,6 +8,7 @@
 
 puts "Creating a survey..."
 
+Quizer::Answer.destroy_all
 Quizer::Quiz.destroy_all
 
 quiz = Quizer::Quiz.new description: Faker::Quotes::Shakespeare.hamlet_quote
