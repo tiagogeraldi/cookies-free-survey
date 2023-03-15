@@ -11,6 +11,10 @@ class Quizer::Alternative < ApplicationRecord
   end
 
   def percentage
-     answers_count.to_f * 100 / question.answers_count.to_f
+    if answers_count > 0 && question.answers_count > 0
+      answers_count.to_f * 100 / question.answers_count.to_f
+    else
+      0
+    end
   end
 end

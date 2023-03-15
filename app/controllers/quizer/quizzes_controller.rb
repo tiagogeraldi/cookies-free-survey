@@ -31,7 +31,7 @@ class Quizer::QuizzesController < Quizer::BaseController
     @quiz.generate_secrets
 
     if @quiz.save
-      redirect_to quizer_quiz_url(@quiz), notice: "Quiz was successfully created."
+      redirect_to quizer_quiz_url(@quiz)
     else
       flash.now[:error] = @quiz.errors.full_messages.join('. ')
       render :new, status: :unprocessable_entity
@@ -41,9 +41,9 @@ class Quizer::QuizzesController < Quizer::BaseController
   # PATCH/PUT /quizer/quizzes/1
   def update
     if @quiz.update(quiz_params)
-      redirect_to quizer_quiz_url(@quiz), notice: "Quiz was successfully updated."
+      redirect_to quizer_quiz_url(@quiz)
     else
-      flash.now[:error] = @quiz.errors.full_messages.join('. ')
+      flash[:error] = @quiz.errors.full_messages.join('. ')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -52,7 +52,7 @@ class Quizer::QuizzesController < Quizer::BaseController
   def destroy
     @quiz.destroy
 
-    redirect_to quizer_quizzes_url, notice: "Quiz was successfully destroyed."
+    redirect_to quizer_quizzes_url
   end
 
   def clone
@@ -70,7 +70,7 @@ class Quizer::QuizzesController < Quizer::BaseController
       end
     end
 
-    redirect_to quizer_quiz_url(cloned), notice: "Survey was successfully cloned."
+    redirect_to cloned, notice: "Your cloned survey is ready"
   end
 
   private

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :quizer do
     resources :quizzes, param: :owner_secret do
       member do
-        get :clone
+        post :clone
       end
 
       resources :questions, except: :show do
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :results, only: %i(index show) do
         collection do
           get :logs
+          delete :delete_all
         end
       end
     end

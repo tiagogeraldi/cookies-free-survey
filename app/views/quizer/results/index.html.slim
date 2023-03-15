@@ -1,5 +1,9 @@
 p = link_to "< Home", quizer_quiz_path(@quiz), class: 'btn btn-light btn-sm'
 p = link_to "All answers", logs_quizer_quiz_results_path(@quiz), class: 'btn btn-light btn-sm'
+p = button_to "Clean-up results", delete_all_quizer_quiz_results_path(@quiz),
+    method: :delete,
+    data: { turbo_confirm: 'All answers will be deleted. Are you sure you want to continue?' },
+    class: 'btn btn-danger btn-sm'
 
 h3
   | #{pluralize @total_people, 'person'} have answered your survey across #{pluralize @total_questions, 'question'}.

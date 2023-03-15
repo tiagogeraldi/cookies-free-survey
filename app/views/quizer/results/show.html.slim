@@ -4,16 +4,18 @@ p = link_to "< back", quizer_quiz_results_path(@quiz), class: 'btn btn-light btn
 h4 = @question.description
 
 - if @question.descriptive?
+  h5 = pluralize @question.answers_count, 'answer'
+
   - @question.answers.each do |alternative|
     p.muted =l alternative.created_at
     p = alternative.descriptive
     hr.line
 
-- else
+- elsif @question.alternatives.any?
   table.table.table-striped
     tr
       th Alternative
-      th.text-end Correct answer (?)
+      th.text-end Correct answer
       th.text-end Answers
       th.text-end Percentage
 
@@ -23,7 +25,6 @@ h4 = @question.description
         td.text-end = alternative.correct
         td.text-end = alternative.answers_count
         td.text-end = number_to_percentage alternative.percentage, precision: 1
-
-
-
-
+- else
+  .alert.alert-warning
+    | This question has no alternatives

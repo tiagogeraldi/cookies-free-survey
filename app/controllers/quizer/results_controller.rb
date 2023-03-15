@@ -1,11 +1,8 @@
 class Quizer::ResultsController < Quizer::BaseController
   before_action :set_quiz_by_owner_secret
+  before_action :no_answer_warning, only: %i(index logs)
 
   def index
-    if @quiz.answers.blank?
-      flash.now[:error] = "Nobody has answered your survey so far"
-    end
-
     @total_people = @quiz.answers.count_by_session
     @total_questions = @quiz.questions.count
   end
@@ -20,5 +17,19 @@ class Quizer::ResultsController < Quizer::BaseController
       includes(:alternatives, :quiz, :question).
       order(created_at: :desc).
       paginate(page: params[:page], per_page: 30)
+  end
+
+  def delete_all
+    @quiz.answers.destroy_all
+
+    redirect_to quizer_quiz_results_path(@quiz)
+  end
+
+  private
+
+  def no_answer_warning
+    if @quiz.answers.blank?
+      flash[:error] = "Nobody has answered your survey so far"
+    end
   end
 end
