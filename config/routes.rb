@@ -15,6 +15,8 @@ Rails.application.routes.draw do
           delete :delete_all
         end
       end
+
+      resources :exports, only: %i(index show)
     end
 
     resources :answers, only: %i(index new) do

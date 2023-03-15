@@ -1,0 +1,6 @@
+p = link_to "< Home", quizer_quiz_path(@quiz), class: 'btn btn-light btn-sm'
+
+h3 Download CSV files
+
+p = link_to 'Download all questions', quizer_quiz_export_path(id: 'questions'), class: 'btn btn-primary'
+p = link_to 'Download all answers', quizer_quiz_export_path(id: 'answers'), class: 'btn btn-primary'
