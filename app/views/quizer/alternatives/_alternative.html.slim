@@ -1,3 +1,5 @@
 tr id=dom_id(alternative)
   td = alternative.description
   td = alternative.correct
+  td = link_to 'Edit', edit_quizer_quiz_question_alternative_path(@quiz, @question, alternative),
+       class: 'btn btn-sm'
