@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_214434) do
     t.integer "question_type", null: false
     t.text "description", null: false
     t.integer "position"
+    t.integer "alternatives_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_quizer_questions_on_quiz_id"

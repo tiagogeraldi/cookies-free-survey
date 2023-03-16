@@ -5,6 +5,7 @@ class CreateQuizerQuestions < ActiveRecord::Migration[7.0]
       t.integer :question_type, null: false
       t.text :description, null: false
       t.integer :position
+      t.integer :alternatives_count
 
       t.timestamps
     end

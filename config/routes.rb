@@ -6,6 +6,13 @@ Rails.application.routes.draw do
       end
 
       resources :questions, except: :show do
+        member do
+          put :move_up
+          put :move_down
+          put :move_top
+          put :move_bottom
+        end
+
         resources :alternatives, except: :show
       end
 
