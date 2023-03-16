@@ -2,7 +2,6 @@ p = link_to "< Home", quizer_quiz_path(@quiz), class: 'btn btn-light btn-sm'
 
 h2
   | Questions
-  span.badge.text-bg-light = @quiz.questions.count
 
 p= link_to "New question", new_quizer_quiz_question_path(@quiz),
    class: 'btn btn-primary'
@@ -11,13 +10,15 @@ p= link_to "New question", new_quizer_quiz_question_path(@quiz),
 
 table.table.table-striped
   tr
+    th
     th Question
     th Type
     th Alternatives
     th
     th Order
-  - @questions.each do |question|
+  - @questions.each.with_index do |question, index|
     tr
+      td.text-end = index + 1
       td = truncate question.description, length: 200
       td = question.question_type
       td

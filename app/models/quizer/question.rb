@@ -24,14 +24,6 @@ class Quizer::Question < ApplicationRecord
     @answers_count ||= answers.count
   end
 
-  # def first?
-  #   quiz.questions.order(:position).first == self
-  # end
-
-  # def last?
-  #   quiz.questions.order(:position).last == self
-  # end
-
   def prev_question
     quiz.questions.order(:position).where('position < ?', position).last
   end
@@ -40,17 +32,11 @@ class Quizer::Question < ApplicationRecord
     quiz.questions.order(:position).where('position > ?', position).first
   end
 
-  def move_up!
+  def switch_position!(other_question)
     transaction do
-      prev_question.update! position: position
-      update! position: position - 1
-    end
-  end
-
-  def move_down!
-    transaction do
-      next_question.update! position: position
-      update! position: position + 1
+      new_position = other_question.position
+      other_question.update! position: position
+      update! position: new_position
     end
   end
 

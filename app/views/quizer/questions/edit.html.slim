@@ -1,5 +1,5 @@
 p = link_to "< Back", quizer_quiz_questions_path(@quiz), class: 'btn btn-light btn-sm'
 
 h2 Editing question
-= form_with(model: [@quiz, @question], url: quizer_quiz_question_path) do |form|
+= form_with(model: [@quiz, @question], url: quizer_quiz_question_path(go_back: params[:go_back])) do |form|
   = render "form", form: form, question: @question

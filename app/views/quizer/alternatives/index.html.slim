@@ -1,10 +1,26 @@
 p = link_to "< Back", quizer_quiz_questions_path(@quiz), class: 'btn btn-light btn-sm'
 
+h2 Question
+= link_to 'Edit',
+  edit_quizer_quiz_question_path(@quiz, @question, go_back: request.fullpath),
+  class: 'btn btn-secondary btn-sm'
+p = @question.description
+
 h2 Alternatives
 
 table.table#quizer_alternatives
-  - @alternatives.each do |alternative|
-    = render alternative
+  tr
+    th
+    th Description
+    th Correct alternative
+    th
+  - @alternatives.each.with_index do |alternative, i|
+    tr id=dom_id(alternative)
+      td.text-end = i + 1
+      td = alternative.description
+      td = alternative.correct
+      td = link_to 'Edit', edit_quizer_quiz_question_alternative_path(@quiz, @question, alternative),
+           class: 'btn btn-sm'
 
 = link_to "New alternative",
   new_quizer_quiz_question_alternative_path(@quiz, @question),

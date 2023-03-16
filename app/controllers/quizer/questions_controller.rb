@@ -32,7 +32,11 @@ class Quizer::QuestionsController < Quizer::BaseController
   # PATCH/PUT /quizer/questions/1
   def update
     if @question.update(question_params)
-      redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully updated."
+      if params[:go_back]
+        redirect_to params[:go_back]
+      else
+        redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully updated."
+      end
     else
       flash.now[:error] = @question.errors.full_messages.join('. ')
       render :edit, status: :unprocessable_entity
@@ -47,12 +51,12 @@ class Quizer::QuestionsController < Quizer::BaseController
   end
 
   def move_up
-    @question.move_up!
+    @question.switch_position!(@question.prev_question)
     redirect_to quizer_quiz_questions_url(@quiz)
   end
 
   def move_down
-    @question.move_down!
+    @question.switch_position!(@question.next_question)
     redirect_to quizer_quiz_questions_url(@quiz)
   end
 
