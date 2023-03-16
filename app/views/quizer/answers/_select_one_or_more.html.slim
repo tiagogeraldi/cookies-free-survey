@@ -3,6 +3,6 @@
     = f.check_box :alternative_ids,
       { multiple: true, class: 'form-check-input', checked: answer.alternatives.include?(alternative) },
       alternative.id, nil
-    label.form-check-label
+    label.form-check-label for="quizer_answer_alternative_ids_#{alternative.id}"
      strong.me-3 =  i + 1
      span = alternative.description

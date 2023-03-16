@@ -2,6 +2,6 @@
   .form-check
     = f.radio_button :alternative_ids, alternative.id, class: 'form-check-input',
       checked: answer.alternatives.include?(alternative)
-    label.form-check-label
-     strong.me-3 =  i + 1
-     span = alternative.description
+    label.form-check-label for="quizer_answer_alternative_ids_#{alternative.id}"
+      strong.me-3 =  i + 1
+      span = alternative.description
