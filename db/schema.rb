@@ -56,6 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_214434) do
     t.text "description"
     t.string "owner_secret", limit: 20, null: false
     t.string "audience_secret", limit: 20, null: false
+    t.boolean "active", default: false
+    t.boolean "paid", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["audience_secret"], name: "index_quizer_quizzes_on_audience_secret", unique: true

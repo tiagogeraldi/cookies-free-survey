@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :quizzes, param: :owner_secret do
       member do
         post :clone
+        patch :toggle_active
       end
 
       resources :questions, except: :show do

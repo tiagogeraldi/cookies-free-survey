@@ -15,6 +15,10 @@
     method: :post,
     data: { turbo_confirm: 'This action is going to create a new survey cloning your current questions and alternatives. Do you want to continue?' }
 
+
+.form-check.form-switch id="#{@quiz.id}-active"
+  = render 'active'
+
 .row
   .col-md-6.col-sm-12.mt-2
     .card
@@ -39,6 +43,7 @@
 = render @quiz
 
 p.mt-5
+  p = "This survey will be automatically deleted at #{l @quiz.expiration_date}. Paid surveys last for 180 days."
   = button_to "Delete quiz", @quiz,
     method: :delete,
     class: 'btn btn-danger btn-sm',

@@ -1,5 +1,5 @@
 class Quizer::QuizzesController < Quizer::BaseController
-  before_action :set_quiz_by_owner_secret, only: %i(show results edit destroy update clone)
+  before_action :set_quiz_by_owner_secret, only: %i(show results edit destroy update clone toggle_active)
 
   # GET /quizer/quizzes
   def index
@@ -53,6 +53,17 @@ class Quizer::QuizzesController < Quizer::BaseController
     @quiz.destroy
 
     redirect_to quizer_quizzes_url
+  end
+
+  def toggle_active
+    @quiz.update active: !@quiz.active
+
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("#{@quiz.id}-active", partial: 'active')
+      }
+      format.html { redirect_to @quiz }
+    end
   end
 
   def clone

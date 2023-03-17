@@ -1,11 +1,12 @@
+FREE_PERIOD_DAYS = 14.freeze
+PAID_PERIOD_DAYS = 180.freeze
+
 class Quizer::Quiz < ApplicationRecord
   has_many :questions, dependent: :destroy,
-           class_name: 'Quizer::Question',
-           dependent: :destroy
+           class_name: 'Quizer::Question'
 
   has_many :answers, dependent: :destroy,
-           class_name: 'Quizer::Answer',
-           dependent: :destroy
+           class_name: 'Quizer::Answer'
 
   validates :description, presence: true
 
@@ -16,5 +17,13 @@ class Quizer::Quiz < ApplicationRecord
 
   def to_param
     owner_secret
+  end
+
+  def expiration_date
+    if paid
+      created_at + PAID_PERIOD_DAYS.days
+    else
+      created_at + FREE_PERIOD_DAYS.days
+    end.to_date
   end
 end

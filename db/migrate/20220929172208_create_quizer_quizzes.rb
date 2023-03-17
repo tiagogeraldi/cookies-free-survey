@@ -4,6 +4,8 @@ class CreateQuizerQuizzes < ActiveRecord::Migration[7.0]
       t.text :description
       t.string :owner_secret, limit: 20, null: false
       t.string :audience_secret, limit: 20, null: false
+      t.boolean :active, default: true
+      t.boolean :paid, default: false
 
       t.timestamps
     end
