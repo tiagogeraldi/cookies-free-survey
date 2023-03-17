@@ -4,13 +4,7 @@ class Quizer::AnswersController < Quizer::BaseController
 
   def index
     @session_hex = SecureRandom.hex(10)
-    questions = @quiz.questions.order(:position)
-
-    if questions.any?
-      @question = questions.first
-    else
-      flash.now[:error] = "This survey has no questions"
-    end
+    @first_question = @quiz.questions.order(:position).first
   end
 
   def new
