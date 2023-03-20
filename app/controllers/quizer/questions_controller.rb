@@ -19,7 +19,7 @@ class Quizer::QuestionsController < Quizer::BaseController
   # POST /quizer/questions
   def create
     @question = @quiz.questions.new(question_params)
-    @question.position = @quiz.questions.maximum(:position) + 1
+    @question.position = @quiz.questions.maximum(:position).to_i + 1
 
     if @question.save
       redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."

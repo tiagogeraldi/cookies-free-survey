@@ -20,7 +20,7 @@ table.table.table-striped
     tr
       td.text-end = index + 1
       td = truncate question.description, length: 200
-      td = question.question_type
+      td = question.question_type.humanize
       td
         - if !question.descriptive?
           = link_to quizer_quiz_question_alternatives_url(@quiz, question), class: 'btn btn-sm btn-primary' do

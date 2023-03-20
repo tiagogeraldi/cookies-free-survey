@@ -12,6 +12,19 @@ class Quizer::Question < ApplicationRecord
 
   enum :question_type, %i(select_one select_one_or_more descriptive)
 
+
+  QUESTION_TYPE_NAMES = {
+    'select_one' => 'Select only one alternative',
+    'select_one_or_more' => 'Select one or more alternatives',
+    'descriptive' => 'Free descriptive text, no alternatives'
+  }.freeze
+
+  def self.question_types_for_select
+    question_types.map do |key, value|
+      [QUESTION_TYPE_NAMES[key], key]
+    end
+  end
+
   def prev_question
     quiz.questions.order(:position).where('position < ?', position).last
   end
