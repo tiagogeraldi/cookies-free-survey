@@ -9,15 +9,15 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   body style="height: 100%"
-    .container-sm.d-flex.justify-content-center.flex-column.text-center style="height: 100%"
+    .container.d-flex.justify-content-center.flex-column.text-center style="height: 100%"
       = render '/layouts/alerts'
-      .content.mb-5
+      .content.mb-5.pb-4.mt-2
         = yield
-      .footer.mt-5
-        h4
+      footer.mt-5.pt-4
+        = link_to '/', class: 'link-secondary link-sm text-decoration-none', target: '_blank' do
           = image_tag 'cookies-free.png',
-            alt: 'Cookies Free', width: 50
-
-        = link_to '/', class: 'link-secondary link-sm text-decoration-none' do
-          .text-muted
-            | Create your on survey or quiz for free
+            alt: 'Cookies Free', width: 80
+          .fs-6.text-muted.lh-1.fw-lighter.mt-1
+            | Surveys and quizzes
+            br
+            | without cookies or sessions for free

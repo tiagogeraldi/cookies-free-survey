@@ -5,3 +5,15 @@ html, body{
   height:100vh;
   width:100vw;
 }
+
+.container {
+  max-width: 800px;
+}
+
+.multiline {
+  white-space: pre-wrap;
+}
+
+.share-link {
+  max-width: 400px;
+}

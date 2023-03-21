@@ -1,5 +1,5 @@
 - question.alternatives.each.with_index do |alternative, i|
-  .form-check
+  .form-check.m-2
     = f.check_box :alternative_ids,
       { multiple: true, class: 'form-check-input', checked: answer.alternatives.include?(alternative) },
       alternative.id, nil

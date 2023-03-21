@@ -11,13 +11,13 @@ puts "Creating a survey..."
 Quizer::Answer.destroy_all
 Quizer::Quiz.destroy_all
 
-quiz = Quizer::Quiz.new description: Faker::Quotes::Shakespeare.hamlet_quote
+quiz = Quizer::Quiz.new description: Quizer::Quiz::DESCRIPTION_SURVEY_EXAMPLE
 quiz.generate_secrets
 quiz.save!
 
 Quizer::Question.question_types.keys.each.with_index do |question_type, index|
   question = quiz.questions.new question_type: question_type, position: index + 1
-  question.description = Quizer::Quiz::DESCRIPTION_EXAMPLE
+  question.description = Faker::Quotes::Shakespeare.king_richard_iii
   question.save!
 
   if !question.descriptive?

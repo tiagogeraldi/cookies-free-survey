@@ -10,7 +10,7 @@ class Quizer::Quiz < ApplicationRecord
 
   validates :description, presence: true
 
-  DESCRIPTION_SURVEY_EXAMPLE = %q("Start the Survey and Help Us Improve!"
+  DESCRIPTION_SURVEY_EXAMPLE = %q(Start the Survey and Help Us Improve!
 
 By taking this brief survey, you can help us understand how we can better serve your needs. We value your feedback and will use it to improve our products and services. The survey will only take a few minutes of your time, and your responses will be kept completely confidential.
 

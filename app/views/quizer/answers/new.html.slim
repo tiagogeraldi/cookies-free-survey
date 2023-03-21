@@ -3,18 +3,20 @@
 
   h4 = @question.description
 
-  = render partial: @question.question_type, locals: { f: f, question: @question, answer: @answer }
+  .text-start.p-4
+    = render partial: @question.question_type, locals: { f: f, question: @question, answer: @answer }
 
+  .my-2 = f.submit 'Send', class: 'btn btn-primary btn-lg'
+
+  hr.line
   .btn-group
     - if @question.prev_question
-      = link_to 'Prev', new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.prev_question.id, session_hex: @session_hex),
-        class: 'btn btn-secondary'
+      = link_to 'Previous question', new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.prev_question.id, session_hex: @session_hex),
+        class: 'btn btn-secondary btn-sm'
     - if @question.next_question
-      = link_to 'Next',
+      = link_to 'Skip question',
         new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.next_question.id, session_hex: @session_hex),
-        class: 'btn btn-secondary'
+        class: 'btn btn-secondary btn-sm'
     - else
-      = link_to 'Next', done_quizer_answers_path(s: @quiz.audience_secret),
-        class: 'btn btn-secondary'
-
-    = f.submit 'Answer', class: 'btn btn-primary'
+      = link_to 'Skip question', done_quizer_answers_path(s: @quiz.audience_secret),
+        class: 'btn btn-secondary btn-sm'
