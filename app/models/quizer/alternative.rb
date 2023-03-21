@@ -6,6 +6,10 @@ class Quizer::Alternative < ApplicationRecord
 
   validates :description, presence: true
 
+  DESCRIPTION_SURVEY_EXAMPLE = "Quality of the product/service".freeze
+
+  DESCRIPTION_QUIZ_EXAMPLE = "Toronto".freeze
+
   def answers_count
     @answers_count ||= answers.count
   end

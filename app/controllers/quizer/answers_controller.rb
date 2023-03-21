@@ -2,6 +2,8 @@ class Quizer::AnswersController < Quizer::BaseController
   before_action :set_quiz_by_audience_secret
   before_action :set_question, :set_session_hex, except: %i(index done)
 
+  layout 'audience'
+
   def index
     @session_hex = SecureRandom.hex(10)
     @first_question = @quiz.questions.order(:position).first

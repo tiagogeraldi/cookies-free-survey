@@ -17,7 +17,7 @@ quiz.save!
 
 Quizer::Question.question_types.keys.each.with_index do |question_type, index|
   question = quiz.questions.new question_type: question_type, position: index + 1
-  question.description = Faker::Quotes::Shakespeare.king_richard_iii
+  question.description = Quizer::Quiz::DESCRIPTION_EXAMPLE
   question.save!
 
   if !question.descriptive?

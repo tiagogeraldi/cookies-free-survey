@@ -1,6 +1,8 @@
 .my-4
   = form.label :description, class: 'form-label'
-  = form.text_area :description, class: 'form-control'
+  = form.text_area :description, class: 'form-control',
+    placeholder: Quizer::Alternative::DESCRIPTION_SURVEY_EXAMPLE
+
 .my-4
   = form.label :correct, class: 'form-label'
   = form.check_box :correct

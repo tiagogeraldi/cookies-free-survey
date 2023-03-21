@@ -12,6 +12,9 @@ class Quizer::Question < ApplicationRecord
 
   enum :question_type, %i(select_one select_one_or_more descriptive)
 
+  DESCRIPTION_SURVEY_EXAMPLE = "Which of the following best describes your reason for using [product/service/company]?".freeze
+
+  DESCRIPTION_QUIZ_EXAMPLE = "What is the capital city of Canada?".freeze
 
   QUESTION_TYPE_NAMES = {
     'select_one' => 'Select only one alternative',

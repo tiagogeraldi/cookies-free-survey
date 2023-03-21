@@ -1,12 +1,12 @@
 .my-4
   = form.label :question_type, class: 'form-label'
-  / TODO: humanize / translate question types
   = form.select :question_type,
     options_for_select(Quizer::Question.question_types_for_select),
     {},
     { class: 'form-select' }
 .my-4
   = form.label :description, 'Question', class: 'form-label'
-  = form.text_area :description, class: 'form-control', rows: 7
+  = form.text_area :description, class: 'form-control', rows: 7,
+    placeholder: Quizer::Question::DESCRIPTION_SURVEY_EXAMPLE
 
 = form.submit class: 'btn btn-primary'

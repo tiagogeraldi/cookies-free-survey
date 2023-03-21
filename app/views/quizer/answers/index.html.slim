@@ -5,7 +5,7 @@
   .alert.alert-warning
     | This survey has no questions
 - else
-  p = @quiz.description
+  p.fs-3 = @quiz.description
 
   = link_to 'Start Survey',
     new_quizer_answer_path(s: @quiz.audience_secret, question_id: @first_question.id, session_hex: @session_hex),
