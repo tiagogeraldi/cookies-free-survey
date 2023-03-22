@@ -27,8 +27,14 @@ To get started, simply click the button below:
   ).freeze
 
   def generate_secrets
-    self.owner_secret = SecureRandom.hex(10)
-    self.audience_secret = SecureRandom.hex(10)
+    loop do
+      self.owner_secret = SecureRandom.hex(6)
+      break if Quizer::Quiz.where(owner_secret: self.owner_secret).blank?
+    end
+    loop do
+      self.audience_secret = SecureRandom.hex(6)
+     break if Quizer::Quiz.where(audience_secret: self.audience_secret).blank?
+   end
   end
 
   def to_param
