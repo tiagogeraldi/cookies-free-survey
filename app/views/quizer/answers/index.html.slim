@@ -8,6 +8,7 @@
   p.lead.multiline
     = @quiz.description
 
-  = link_to 'Start Survey',
-    new_quizer_answer_path(s: @quiz.audience_secret, question_id: @first_question.id, session_hex: @session_hex),
-    class: 'btn btn-lg btn-primary'
+  = link_to new_quizer_answer_path(s: @quiz.audience_secret, question_id: @first_question.id, session_hex: @session_hex),
+    class: 'btn btn-lg btn-primary' do
+    i.bi.bi-collection-play-fill.me-2
+    | Start Survey

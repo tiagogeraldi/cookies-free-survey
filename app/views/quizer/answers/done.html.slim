@@ -1,4 +1,6 @@
-h4.pb-2 Thank you for completing our survey!
+h4.pb-2
+  | Thank you for completing our survey!
+  i.bi.bi-rocket-takeoff.ms-2
 
 p.lead.pt-4
   | We appreciate your time and effort in providing us with your valuable feedback. Your responses will help us improve our services and better understand the needs of our audience.
@@ -10,4 +12,5 @@ p.lead.pb-4
     = text_field_tag 'audience-link', quizer_answers_url(s: @quiz.audience_secret,
       only_path: false), readonly: true, class: 'form-control'
     span.input-group-text
-      = link_to 'Copy', '#', class: 'clipboard', data: { clipboard_target: '#audience-link' }
+      = link_to '#', class: 'clipboard', data: { clipboard_target: '#audience-link' } do
+        i.bi.bi-clipboard

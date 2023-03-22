@@ -1,22 +1,29 @@
 = form_with(model: Quizer::Answer.new, url: upsert_quizer_answers_path(s: @quiz.audience_secret, question_id: @question.id)) do |f|
   = f.hidden_field :session_hex, value: @session_hex
+  hr.line
 
   h4 = @question.description
 
   .text-start.p-4
     = render partial: @question.question_type, locals: { f: f, question: @question, answer: @answer }
 
-  .my-2 = f.submit 'Send', class: 'btn btn-primary btn-lg'
+  .my-2
+    button.btn.btn-primary.btn-lg type="submit"
+      i.bi.bi-send-fill.me-2
+      | Send
 
   hr.line
   .btn-group
     - if @question.prev_question
-      = link_to 'Previous question', new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.prev_question.id, session_hex: @session_hex),
-        class: 'btn btn-secondary btn-sm'
+      = link_to new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.prev_question.id, session_hex: @session_hex),
+        class: 'btn btn-secondary btn-sm' do
+        i.bi.bi-skip-backward-fill.me-2
+        | Previous question
     - if @question.next_question
-      = link_to 'Skip question',
-        new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.next_question.id, session_hex: @session_hex),
-        class: 'btn btn-secondary btn-sm'
+      = link_to new_quizer_answer_path(s: @quiz.audience_secret, question_id: @question.next_question.id, session_hex: @session_hex),
+        class: 'btn btn-secondary btn-sm' do
+        i.bi.bi-skip-forward-fill.me-2
+        | Skip question
     - else
       = link_to 'Skip question', done_quizer_answers_path(s: @quiz.audience_secret),
         class: 'btn btn-secondary btn-sm'
