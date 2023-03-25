@@ -2,6 +2,8 @@ class Quizer::QuestionsController < Quizer::BaseController
   before_action :set_quiz_by_owner_secret
   before_action :set_question, only: %i[ edit update destroy move_up move_down move_top move_bottom ]
 
+  layout 'quiz'
+
   # GET /quizer/questions
   def index
     @questions = @quiz.questions.order(:position)

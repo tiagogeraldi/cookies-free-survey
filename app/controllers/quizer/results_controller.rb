@@ -2,6 +2,8 @@ class Quizer::ResultsController < Quizer::BaseController
   before_action :set_quiz_by_owner_secret
   before_action :no_answer_warning, only: %i(index logs)
 
+  layout 'quiz'
+
   def index
     @total_people = @quiz.answers.count_by_session
     @total_questions = @quiz.questions.count

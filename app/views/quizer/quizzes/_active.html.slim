@@ -4,6 +4,12 @@
     true, false
 
   - if @quiz.active
-    = f.label :active, 'Deactivate this survey to stop receiving answers'
+    = f.label :active, 'Active'
+    br
+    small
+      | Deactivate it to stop receiving answers
   - else
-    = f.label :active, 'Activate this survey to start to allow receiving answers'
+    = f.label :active, 'Inactive'
+    br
+    small
+      | Activate it to start receiving answers

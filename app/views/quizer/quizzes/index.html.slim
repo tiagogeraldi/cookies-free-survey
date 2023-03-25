@@ -1,9 +1,15 @@
-.card.my-4
-  .card-body
-    p
-     strong Create your free quiz!
-    p No registration required. This app is free of any private data.
-    p It doesn't use session or cookies.
-    p Create a quiz, save the link, and send it to your audience.
+.text-start
+  p.lead
+    | Looking for an easy way to create surveys and quizzes without any sign-up, sessions, or cookies? Our product offers you just that! With our hassle-free platform, you can create engaging and interactive surveys and quiz games in a matter of minutes.
+  p.lead
+    | And the best part? We don't collect or store any private data. You can be sure that your participants' information is safe and secure.
+  p.lead
+    | Whether you're a teacher looking for a fun way to quiz your students or a marketer looking to gather customer feedback, our product is perfect for you. It's easy, fast, and completely free.
+  p.lead
+    | So why wait? Start creating your surveys and quiz games today and see how much fun you can have while keeping your data safe and secure.
 
-= link_to "Create a quiz", new_quizer_quiz_path, class: 'btn btn-primary btn-lg'
+.d-grid.gap-2.d-sm-flex.justify-content-sm-center
+  = link_to "Create a survey", new_quizer_quiz_path,
+    class: 'btn btn-primary btn-lg px-4 gap-3'
+  = link_to "Create a quiz", new_quizer_quiz_path,
+    class: 'btn btn-outline-dark btn-lg px-4'

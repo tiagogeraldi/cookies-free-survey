@@ -1,6 +1,8 @@
 class Quizer::ExportsController < Quizer::BaseController
   before_action :set_quiz_by_owner_secret
 
+  layout 'quiz'
+
   def index
   end
 

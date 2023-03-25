@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title
+      | Cookiesfree
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+  body
+    main
+      .px-4.py-5.my-5.text-center
+        = image_tag 'cookies-free.png', alt: 'Cookies Free', width: 150, class: 'd-block mx-auto mb-4'
+
+        h1.display-5.fw-bold
+          | Survey Maker
+
+        .col-lg-6.mx-auto
+          = yield

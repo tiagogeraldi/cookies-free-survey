@@ -1,12 +1,12 @@
-= form_with(model: quiz) do |form|
-  .my-4
-    = form.label :description, class: 'form-label'
+.col-lg-6.mx-auto
+  = form_with(model: quiz) do |form|
+    h4 Description
     p.fw-light
-      | This description is the first thing your audience will see.
-      |  Create an introduction or a welcome message.
+      | The description is a critical component of any successful survey.
+      | This is the first thing that your audience will see when they arrive at your survey page, so it's important to make a strong first impression.
 
     = form.text_area :description, class: 'form-control', rows: 7,
       placeholder: Quizer::Quiz::DESCRIPTION_SURVEY_EXAMPLE
 
-
-  = form.submit class: 'btn btn-primary'
+    .mt-2.text-center
+      = form.submit 'Save', class: 'btn btn-primary btn-lg'

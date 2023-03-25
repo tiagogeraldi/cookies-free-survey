@@ -1,6 +1,8 @@
 class Quizer::QuizzesController < Quizer::BaseController
   before_action :set_quiz_by_owner_secret, only: %i(show results edit destroy update clone toggle_active)
 
+  layout :resolve_layout
+
   # GET /quizer/quizzes
   def index
   end
@@ -85,6 +87,15 @@ class Quizer::QuizzesController < Quizer::BaseController
   end
 
   private
+
+  def resolve_layout
+    case action_name
+    when 'index'
+      'audience'
+    else
+      'quiz'
+    end
+  end
 
   # Only allow a list of trusted parameters through.
   def quiz_params

@@ -2,6 +2,8 @@ class Quizer::AlternativesController < Quizer::BaseController
   before_action :set_quiz_by_owner_secret, :set_question
   before_action :set_quizer_alternative, only: %i[ edit update destroy ]
 
+  layout 'quiz'
+
   # GET /quizer/alternatives
   def index
     @alternatives = @question.alternatives
