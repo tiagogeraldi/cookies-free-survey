@@ -4,7 +4,7 @@
     small
       = "This survey will be automatically deleted at #{l @quiz.expiration_date}."
       br
-      | Paid surveys last for 180 days.
+      strong Paid surveys last for 180 days and has no ads.
 = button_to @quiz,
   method: :delete,
   class: 'btn btn-danger btn-sm',

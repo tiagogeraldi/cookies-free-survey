@@ -1,9 +1,13 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-import Masonry from 'bootstrap-icons'
 import ClipboardJS from 'clipboard'
 
 document.addEventListener('turbo:load', (event) => {
-  new ClipboardJS('.clipboard');
+  var clipboard = new ClipboardJS('.clipboard');
+  clipboard.on('success', function(e) {
+    e.trigger.innerHTML = '<i class="bi bi-check"/>'
+
+    e.clearSelection();
+  });
 })

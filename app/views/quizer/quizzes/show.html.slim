@@ -15,8 +15,8 @@
       = text_field_tag 'owner-link', url_for([@quiz, { only_path: false }]),
         readonly: true, class: 'form-control text-secondary'
       span.input-group-text
-        = link_to '#', class: 'clipboard', data: { clipboard_target: '#audience-link' } do
-        i.bi.bi-clipboard
+        = link_to '#', class: 'clipboard', data: { clipboard_target: '#owner-link' } do
+          i.bi.bi-clipboard
 
   .col-md-6.col-sm-12.mt-2
     h4.text-success
@@ -31,7 +31,7 @@
         readonly: true, class: 'form-control text-secondary'
       span.input-group-text
         = link_to '#', class: 'clipboard', data: { clipboard_target: '#audience-link' } do
-        i.bi.bi-clipboard
+          i.bi.bi-clipboard
 
 hr.line
 .form-check.form-switch id="#{@quiz.id}-active"
