@@ -3,7 +3,7 @@ p = link_to "< Back", quizer_quiz_results_path(@quiz), class: 'btn btn-light btn
 h5 Question
 p = @question.description
 
-- if @question.descriptive?
+- if @question.open_ended?
   h5 = pluralize @question.answers_count, 'answer'
 
   - @question.answers.each do |alternative|

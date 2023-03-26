@@ -6,7 +6,7 @@ class Quizer::Answer < ApplicationRecord
   has_many :alternatives, through: :answer_alternatives, class_name: 'Quizer::Alternative'
 
   validates :session_hex, :quiz, :question, presence: true
-  validates :descriptive, presence: true, if: :descriptive?
+  validates :descriptive, presence: true, if: :open_ended?
 
   validate :at_least_one_alternative
 
@@ -16,8 +16,8 @@ class Quizer::Answer < ApplicationRecord
 
   private
 
-  def descriptive?
-    question.descriptive?
+  def open_ended?
+    question.open_ended?
   end
 
   def at_least_one_alternative

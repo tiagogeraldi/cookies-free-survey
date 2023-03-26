@@ -20,7 +20,7 @@ Quizer::Question.question_types.keys.each.with_index do |question_type, index|
   question.description = Faker::Quotes::Shakespeare.king_richard_iii
   question.save!
 
-  if !question.descriptive?
+  if !question.open_ended?
     4.times do
       question.alternatives.create!(
         description: Faker::Quotes::Shakespeare.romeo_and_juliet,
@@ -40,7 +40,7 @@ end
       question: question,
       session_hex: session_hex
     )
-    if !question.descriptive?
+    if !question.open_ended?
       answer.alternatives << question.alternatives.sample
     else
       answer.descriptive = Faker::Quotes::Shakespeare.as_you_like_it

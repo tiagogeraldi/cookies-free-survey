@@ -10,7 +10,7 @@ class Quizer::Question < ApplicationRecord
 
   validates :description, :position, presence: true
 
-  enum :question_type, %i(select_one select_one_or_more descriptive)
+  enum :question_type, %i(select_one select_one_or_more open_ended)
 
   DESCRIPTION_SURVEY_EXAMPLE = "Which of the following best describes your reason for using [product/service/company]?".freeze
 
@@ -19,7 +19,7 @@ class Quizer::Question < ApplicationRecord
   QUESTION_TYPE_NAMES = {
     'select_one' => 'Select only one alternative',
     'select_one_or_more' => 'Select one or more alternatives',
-    'descriptive' => 'Free descriptive text, no alternatives'
+    'open_ended' => 'Open ended, no alternatives'
   }.freeze
 
   def self.question_types_for_select

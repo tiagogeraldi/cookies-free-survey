@@ -1,6 +1,6 @@
 h3.d-flex.justify-content-between
   | Editing question
-  - if !@question.descriptive?
+  - if !@question.open_ended?
     = link_to quizer_quiz_question_alternatives_url(@quiz, @question),
       class: 'btn btn-outline-primary' do
       i.bi.bi-list-ol.me-2

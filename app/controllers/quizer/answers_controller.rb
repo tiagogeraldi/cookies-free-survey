@@ -12,7 +12,7 @@ class Quizer::AnswersController < Quizer::BaseController
   def new
     @answer = @question.answers.find_or_initialize_by(session_hex: @session_hex)
 
-    if !@question.descriptive? && @question.alternatives.blank?
+    if !@question.open_ended? && @question.alternatives.blank?
       flash.now[:error] = "This question has no alternatives"
     end
   end

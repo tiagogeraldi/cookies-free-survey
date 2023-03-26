@@ -25,7 +25,7 @@ table.table.table-striped.mt-3
           | Edit
       td = question.question_type.humanize
       td.text-center
-        - if !question.descriptive?
+        - if !question.open_ended?
           = link_to quizer_quiz_question_alternatives_url(@quiz, question),
             class: 'btn btn-sm btn-outline-primary',
             title: 'Add / remove alternatives' do
