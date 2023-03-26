@@ -37,5 +37,7 @@ hr.line
 .form-check.form-switch id="#{@quiz.id}-active"
   .my-3
     = render 'active'
+- if @last_answer
+  em You got an answer #{time_ago_in_words @last_answer.created_at} ago.
 
 = render 'deletion'

@@ -9,6 +9,7 @@ class Quizer::QuizzesController < Quizer::BaseController
 
   # GET /quizer/quizzes/1
   def show
+    @last_answer = @quiz.answers.last
   end
 
   def results
