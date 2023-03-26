@@ -1,25 +1,30 @@
-h2 Question
-= link_to 'Edit',
-  edit_quizer_quiz_question_path(@quiz, @question, go_back: request.fullpath),
-  class: 'btn btn-secondary btn-sm'
+h4
+  | Question
+  = link_to edit_quizer_quiz_question_path(@quiz, @question, go_back: request.fullpath),
+    class: 'btn btn-outline-secondary btn-sm ms-2' do
+    i.bi.bi-pencil.me-1
+    | Edit
 p = @question.description
 
-h2 Alternatives
+h3.mt-4
+  | Alternatives
+  = link_to new_quizer_quiz_question_alternative_path(@quiz, @question),
+    class: 'btn btn-outline-primary btn-sm ms-2' do
+    i.bi.bi-plus-circle.me-1
+    | Add alternative
 
-table.table#quizer_alternatives
-  tr
-    th
-    th Description
-    th Correct alternative
-    th
+
+table.table.table-striped.mt-4
   - @alternatives.each.with_index do |alternative, i|
     tr id=dom_id(alternative)
       td.text-end = i + 1
       td = alternative.description
-      td = alternative.correct
-      td = link_to 'Edit', edit_quizer_quiz_question_alternative_path(@quiz, @question, alternative),
-           class: 'btn btn-sm'
-
-= link_to "New alternative",
-  new_quizer_quiz_question_alternative_path(@quiz, @question),
-  class: 'btn btn-primary'
+      td.text-center
+        - if alternative.correct
+          span.badge.text-bg-success
+            | Correct answer
+      td.text-end
+        = link_to edit_quizer_quiz_question_alternative_path(@quiz, @question, alternative),
+          class: 'btn btn-sm btn-outline-primary' do
+          i.bi.bi-pencil.me-1
+          | Edit

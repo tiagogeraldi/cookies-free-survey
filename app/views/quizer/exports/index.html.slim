@@ -1,4 +1,11 @@
-h3 Download CSV files
+h3 CSV files
 
-p = link_to 'Download all questions', quizer_quiz_export_path(id: 'questions'), class: 'btn btn-primary'
-p = link_to 'Download all answers', quizer_quiz_export_path(id: 'answers'), class: 'btn btn-primary'
+.d-flex.mt-4
+  = link_to quizer_quiz_export_path(id: 'questions'),
+    class: 'btn btn-outline-dark me-2' do
+    i.bi.bi-download.me-1
+    | Download all questions
+  = link_to quizer_quiz_export_path(id: 'answers'),
+    class: 'btn btn-outline-dark' do
+    i.bi.bi-download.me-1
+    | Download all answers

@@ -1,3 +1,11 @@
-h2 Editing question
+h3.d-flex.justify-content-between
+  | Editing question
+  - if !@question.descriptive?
+    = link_to quizer_quiz_question_alternatives_url(@quiz, @question),
+      class: 'btn btn-outline-primary' do
+      i.bi.bi-list-ol.me-2
+      | Add / remove alternatives
+      span.badge.text-bg-light.ms-1 = @question.alternatives.size
+
 = form_with(model: [@quiz, @question], url: quizer_quiz_question_path(go_back: params[:go_back])) do |form|
   = render "form", form: form, question: @question

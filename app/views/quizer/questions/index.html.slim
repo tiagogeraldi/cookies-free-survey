@@ -1,15 +1,15 @@
-h2
+h3
   | Questions
+  = link_to new_quizer_quiz_question_path(@quiz),
+    class: 'btn btn-outline-primary ms-2 btn-sm' do
+    i.bi.bi-plus-circle.me-1
+    | Add question
 
-p= link_to "New question", new_quizer_quiz_question_path(@quiz),
-   class: 'btn btn-primary'
-
-.row.masonry-grid#quizer_questions data-masonry='{"percentPosition": true }'
-
-table.table.table-striped
+table.table.table-striped.mt-3
   tr
     th
     th Question
+    th
     th Type
     th Alternatives
     th
@@ -17,42 +17,45 @@ table.table.table-striped
   - @questions.each.with_index do |question, index|
     tr
       td.text-end = index + 1
-      td = truncate question.description, length: 200
+      td = truncate question.description, length: 80
+      td.text-center
+        = link_to edit_quizer_quiz_question_path(@quiz, question),
+          class: 'btn btn-sm btn-outline-primary' do
+          i.bi.bi-pencil.me-2
+          | Edit
       td = question.question_type.humanize
-      td
+      td.text-center
         - if !question.descriptive?
-          = link_to quizer_quiz_question_alternatives_url(@quiz, question), class: 'btn btn-sm btn-primary' do
-            | Add / remove &nbsp
+          = link_to quizer_quiz_question_alternatives_url(@quiz, question),
+            class: 'btn btn-sm btn-outline-primary',
+            title: 'Add / remove alternatives' do
+            i.bi.bi-list-ol.me-2
             span.badge.text-bg-light = question.alternatives.size
-      td
-        .btn-group
-          = link_to 'Edit',
-            edit_quizer_quiz_question_path(@quiz, question),
-            class: 'btn btn-secondary btn-sm'
-          = button_to "Delete",
-            quizer_quiz_question_path(@quiz, question),
-            method: :delete,
-            class: 'btn btn-danger btn-sm',
-            data: { turbo_confirm: 'Are you sure you want to delete this question?' }
+      td.text-center
+        = button_to quizer_quiz_question_path(@quiz, question),
+          method: :delete,
+          class: 'btn btn-outline-danger btn-sm',
+          data: { turbo_confirm: 'Are you sure you want to delete this question?' } do
+          i.bi.bi-trash
       td
         .btn-group
           - if @questions.first != question
-            = button_to 'up',
-              move_up_quizer_quiz_question_path(@quiz, question),
-              method: :put,
-              class: 'btn btn-sm'
-          - if @questions.last != question
-            = button_to 'down',
-              move_down_quizer_quiz_question_path(@quiz, question),
-              method: :put,
-              class: 'btn btn-sm'
+            = button_to move_up_quizer_quiz_question_path(@quiz, question),
+              method: :put, title: 'Move up',
+              class: 'btn' do
+              i.bi.bi-chevron-up
           - if @questions.first != question
-            = button_to 'top',
-              move_top_quizer_quiz_question_path(@quiz, question),
-              method: :put,
-              class: 'btn btn-sm'
+            = button_to move_top_quizer_quiz_question_path(@quiz, question),
+              method: :put, title: 'Send to top',
+              class: 'btn' do
+              i.bi.bi-chevron-bar-up
           - if @questions.last != question
-            = button_to 'bottom',
-              move_bottom_quizer_quiz_question_path(@quiz, question),
-              method: :put,
-              class: 'btn btn-sm'
+            = button_to move_down_quizer_quiz_question_path(@quiz, question),
+              method: :put, title: 'Move down',
+              class: 'btn' do
+              i.bi.bi-chevron-down
+          - if @questions.last != question
+            = button_to move_bottom_quizer_quiz_question_path(@quiz, question),
+              method: :put, title: 'Send to bottom',
+              class: 'btn' do
+              i.bi.bi-chevron-bar-down

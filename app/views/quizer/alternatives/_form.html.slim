@@ -1,10 +1,11 @@
 .my-4
   = form.label :description, class: 'form-label'
   = form.text_area :description, class: 'form-control',
+    rows: 3,
     placeholder: Quizer::Alternative::DESCRIPTION_SURVEY_EXAMPLE
 
-.my-4
-  = form.label :correct, class: 'form-label'
-  = form.check_box :correct
+.form-check.my-4
+  = form.check_box :correct, class: 'form-check-input'
+  = form.label :correct, class: 'form-check-label'
 
-= form.submit class: 'btn btn-primary'
+= form.submit 'Save', class: 'btn btn-primary btn-lg'

@@ -1,7 +1,7 @@
-p = link_to "< Home", quizer_quiz_path(@quiz), class: 'btn btn-light btn-sm'
-p = link_to "< back", quizer_quiz_results_path(@quiz), class: 'btn btn-light btn-sm'
+p = link_to "< Back", quizer_quiz_results_path(@quiz), class: 'btn btn-light btn-sm'
 
-h4 = @question.description
+h5 Question
+p = @question.description
 
 - if @question.descriptive?
   h5 = pluralize @question.answers_count, 'answer'
@@ -15,14 +15,17 @@ h4 = @question.description
   table.table.table-striped
     tr
       th Alternative
-      th.text-end Correct answer
+      th
       th.text-end Answers
       th.text-end Percentage
 
     - @alternatives.each do |alternative|
       tr
         td = alternative.description
-        td.text-end = alternative.correct
+        td.text-center
+          - if alternative.correct
+            span.badge.text-bg-success
+              | Correct answer
         td.text-end = alternative.answers_count
         td.text-end = number_to_percentage alternative.percentage, precision: 1
 - else

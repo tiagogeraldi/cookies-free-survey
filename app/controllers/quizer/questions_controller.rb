@@ -24,7 +24,11 @@ class Quizer::QuestionsController < Quizer::BaseController
     @question.position = @quiz.questions.maximum(:position).to_i + 1
 
     if @question.save
-      redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."
+      if @question.descriptive?
+        redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."
+      else
+        redirect_to quizer_quiz_question_alternatives_url(@quiz, @question)
+      end
     else
       flash.now[:error] = @question.errors.full_messages.join('. ')
       render :new, status: :unprocessable_entity

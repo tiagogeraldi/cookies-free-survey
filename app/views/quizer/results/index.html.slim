@@ -1,11 +1,18 @@
-p = link_to "All answers", logs_quizer_quiz_results_path(@quiz), class: 'btn btn-light btn-sm'
-p = button_to "Clean-up results", delete_all_quizer_quiz_results_path(@quiz),
+h5
+  | #{pluralize @total_people, 'person'} have answered your survey across #{pluralize @total_questions, 'question'}.
+
+.d-flex.my-4
+  = link_to logs_quizer_quiz_results_path(@quiz),
+    class: 'btn btn-light me-4' do
+    i.bi.bi-database.me-1
+    | See all the answers
+
+  = button_to delete_all_quizer_quiz_results_path(@quiz),
     method: :delete,
     data: { turbo_confirm: 'All answers will be deleted. Are you sure you want to continue?' },
-    class: 'btn btn-danger btn-sm'
-
-h3
-  | #{pluralize @total_people, 'person'} have answered your survey across #{pluralize @total_questions, 'question'}.
+    class: 'btn btn-outline-danger' do
+    i.bi.bi-trash.me-1
+    | Delete all answers
 
 h4 Questions
 table.table.table-striped
@@ -13,6 +20,6 @@ table.table.table-striped
     tr
       td = question.description
       td
-        = link_to 'Details',
+        = link_to 'Answers',
           quizer_quiz_result_path(@quiz, question),
-          class: 'btn btn-sm btn-success'
+          class: 'btn btn-sm btn-outline-success'
