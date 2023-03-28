@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  namespace :quizer do
-    resources :quizzes, param: :owner_secret do
+  namespace :quizer, path: 'q' do
+    resources :quizzes, path: 'q', param: :owner_secret do
       member do
         post :clone
         patch :toggle_active
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       resources :exports, only: %i(index show)
     end
 
-    resources :answers, only: %i(index new) do
+    resources :answers, path: 'a', only: %i(index new) do
       collection do
         post :upsert
         get :done
