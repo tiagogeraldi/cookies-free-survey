@@ -3,7 +3,7 @@
     .col-md-4.col-12
       = form.label :question_type, class: 'form-label'
       = form.select :question_type,
-        options_for_select(Quizer::Question.question_types_for_select),
+        options_for_select(Quizer::Question.question_types_for_select(@quiz)),
         {},
         { class: 'form-select' }
 .my-4

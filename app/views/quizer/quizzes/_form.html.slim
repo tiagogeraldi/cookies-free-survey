@@ -1,8 +1,11 @@
 .col-lg-6.mx-auto
   = form_with(model: quiz) do |form|
+    = form.hidden_field :quiz_type
+
     h4 Description
     p.fw-light
-      | The description is a critical component of any successful survey.
+      | The description is a critical component of any successful #{@quiz.quiz_type}.
+      br
       | This is the first thing that your audience will see when they arrive at your survey page, so it's important to make a strong first impression.
 
     = form.text_area :description, class: 'form-control', rows: 7,

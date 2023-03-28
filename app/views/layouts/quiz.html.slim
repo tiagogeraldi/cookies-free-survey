@@ -12,7 +12,7 @@ html
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.me-auto.mb-2.mb-lg-0
             li.nav-item
-              = link_to 'Survey Maker', quizer_quizzes_url, class: 'nav-link active'
+              = link_to "#{@quiz.quiz_type.humanize} Maker", quizer_quizzes_url, class: 'nav-link active'
 
     .container-sm
       - if @quiz.persisted?
@@ -36,7 +36,7 @@ html
 
                 = link_to edit_quizer_quiz_path(@quiz), class: 'btn btn-sm me-2' do
                   i.bi.bi-pencil.me-1
-                  | Edit survey
+                  | Edit #{@quiz.quiz_type.humanize}
 
                 = link_to quizer_quiz_results_path(@quiz), class: 'btn btn-sm me-2' do
                   i.bi.bi-bullseye.me-1
@@ -49,9 +49,9 @@ html
                 = button_to clone_quizer_quiz_path(@quiz),
                   class: 'btn btn-sm me-2',
                   method: :post,
-                  data: { turbo_confirm: 'This action is going to create a new survey cloning your current questions and alternatives. Do you want to continue?' } do
+                  data: { turbo_confirm: "This action is going to create a new #{@quiz.quiz_type} cloning your current questions and alternatives. Do you want to continue?" } do
                   i.bi.bi-back.me-1
-                  | Clone survey
+                  | Clone #{@quiz.quiz_type.humanize}
 
       = render '/layouts/alerts'
 

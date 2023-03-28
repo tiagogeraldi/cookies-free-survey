@@ -2,12 +2,12 @@
   hr.line
   p
     small
-      = "This survey will be automatically deleted at #{l @quiz.expiration_date}."
+      = "This #{@quiz.quiz_type} will be automatically deleted at #{l @quiz.expiration_date}."
       br
-      strong Paid surveys last for 180 days and has no ads.
+      strong Paying only 3.00 it lasts for 180 days and has no ads for your audience.
 = button_to @quiz,
   method: :delete,
   class: 'btn btn-danger btn-sm',
-  data: { turbo_confirm: 'Are you sure you want to delete this quiz?' } do
+  data: { turbo_confirm: "Are you sure you want to delete this #{@quiz.quiz_type}?" } do
   i.bi.bi-trash.me-1
   | Delete

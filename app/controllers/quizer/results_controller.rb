@@ -31,7 +31,7 @@ class Quizer::ResultsController < Quizer::BaseController
 
   def no_answer_warning
     if @quiz.answers.blank?
-      flash[:error] = "Nobody has answered your survey so far"
+      flash[:error] = "Nobody has answered your #{@quiz.quiz_type} so far"
     end
   end
 end

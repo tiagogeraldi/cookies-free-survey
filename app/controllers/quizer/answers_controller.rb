@@ -31,19 +31,25 @@ class Quizer::AnswersController < Quizer::BaseController
   end
 
   def done
+    if @quiz.quiz?
+      @answers_count = @quiz.questions.count
+      @correct_answers_count = @quiz.correct_answers_count(params[:session_hex])
+    end
   end
 
   private
 
   def redirect_to_next_question
+    session_hex = answer_params[:session_hex]
+
     if @question.next_question
       redirect_to new_quizer_answer_path(
         s: params[:s],
-        session_hex: answer_params[:session_hex],
+        session_hex: session_hex,
         question_id: @question.next_question.id
       )
     else
-      redirect_to done_quizer_answers_path(s: params[:s])
+      redirect_to done_quizer_answers_path(s: params[:s], session_hex: session_hex)
     end
   end
 

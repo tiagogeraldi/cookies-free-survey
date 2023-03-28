@@ -21,7 +21,7 @@ class Quizer::QuizzesController < Quizer::BaseController
 
   # GET /quizer/quizzes/new
   def new
-    @quiz = Quizer::Quiz.new
+    @quiz = Quizer::Quiz.new(quiz_type: params[:quiz_type])
   end
 
   # GET /quizer/quizzes/1/edit
@@ -100,6 +100,6 @@ class Quizer::QuizzesController < Quizer::BaseController
 
   # Only allow a list of trusted parameters through.
   def quiz_params
-    params.require(:quizer_quiz).permit(:description, :public_results)
+    params.require(:quizer_quiz).permit(:description, :public_results, :quiz_type)
   end
 end

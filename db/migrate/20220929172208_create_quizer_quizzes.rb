@@ -6,6 +6,7 @@ class CreateQuizerQuizzes < ActiveRecord::Migration[7.0]
       t.string :audience_secret, limit: 20, null: false
       t.boolean :active, default: true
       t.boolean :paid, default: false
+      t.integer :quiz_type
 
       t.timestamps
     end

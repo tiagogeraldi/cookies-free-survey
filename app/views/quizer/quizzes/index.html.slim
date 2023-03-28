@@ -9,7 +9,7 @@
     | So why wait? Start creating your surveys and quiz games today and see how much fun you can have while keeping your data safe and secure.
 
 .d-grid.gap-2.d-sm-flex.justify-content-sm-center
-  = link_to "Create a survey", new_quizer_quiz_path,
+  = link_to "Create a survey", new_quizer_quiz_path(quiz_type: 'survey'),
     class: 'btn btn-primary btn-lg px-4 gap-3'
-  = link_to "Create a quiz", new_quizer_quiz_path,
+  = link_to "Create a quiz", new_quizer_quiz_path(quiz_type: 'quiz'),
     class: 'btn btn-outline-dark btn-lg px-4'

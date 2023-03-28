@@ -15,17 +15,19 @@ p = @question.description
   table.table.table-striped
     tr
       th Alternative
-      th
+      - if @quiz.quiz?
+        th
       th.text-end Answers
       th.text-end Percentage
 
     - @alternatives.each do |alternative|
       tr
         td = alternative.description
-        td.text-center
-          - if alternative.correct
-            span.badge.text-bg-success
-              | Correct answer
+        - if @quiz.quiz?
+          td.text-center
+            - if alternative.correct
+              span.badge.text-bg-success
+                | Correct answer
         td.text-end = alternative.answers_count
         td.text-end = number_to_percentage alternative.percentage, precision: 1
 - else

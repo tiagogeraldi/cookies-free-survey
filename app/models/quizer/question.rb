@@ -22,8 +22,11 @@ class Quizer::Question < ApplicationRecord
     'open_ended' => 'Open ended, no alternatives'
   }.freeze
 
-  def self.question_types_for_select
-    question_types.map do |key, value|
+  def self.question_types_for_select(quiz)
+    types = question_types.dup
+    types.except!(:open_ended) if quiz.quiz?
+
+    types.map do |key, value|
       [QUESTION_TYPE_NAMES[key], key]
     end
   end

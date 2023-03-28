@@ -8,7 +8,9 @@ class Quizer::Quiz < ApplicationRecord
   has_many :answers, dependent: :destroy,
            class_name: 'Quizer::Answer'
 
-  validates :description, presence: true
+  validates :description, :quiz_type, presence: true
+
+  enum :quiz_type, %i(quiz survey)
 
   DESCRIPTION_SURVEY_EXAMPLE = %q(Start the Survey and Help Us Improve!
 
@@ -47,5 +49,37 @@ To get started, simply click the button below:
     else
       created_at + FREE_PERIOD_DAYS.days
     end.to_date
+  end
+
+  # Valid only for Quiz types:
+  #
+  # For select_one question type,
+  # just count whenever they answered a correct alternative.
+  #
+  # For select_one_or_more,
+  # Consider correct when they answered at least one correct alternative,
+  # but haven't selected any incorrect alternative
+  def correct_answers_count(session_hex)
+    scope = answers.
+      preload(:alternatives, :question).
+      joins(:alternatives, :question).
+      where(session_hex: session_hex)
+
+    correct_count = scope.
+      where(
+        quizer_questions: { question_type: 'select_one' },
+        quizer_alternatives: { correct: true }
+      ).count
+
+    scope.where(quizer_questions: { question_type: 'select_one_or_more' }).each do |answer|
+      correct_ids = answer.question.alternatives.select(&:correct).map(&:id)
+      answered_ids = answer.alternatives.map(&:id)
+
+      if (answered_ids - correct_ids).blank?
+        correct_count += 1
+      end
+    end
+
+    correct_count
   end
 end

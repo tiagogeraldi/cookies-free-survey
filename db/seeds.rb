@@ -12,6 +12,7 @@ Quizer::Answer.destroy_all
 Quizer::Quiz.destroy_all
 
 quiz = Quizer::Quiz.new description: Quizer::Quiz::DESCRIPTION_SURVEY_EXAMPLE
+quiz.quiz_type = 'quiz'
 quiz.generate_secrets
 quiz.save!
 

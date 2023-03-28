@@ -8,9 +8,9 @@
       i.bi.bi-cone.me-2
       | Owner link
     p
-      | Save this link to return to this page and manage your survey
+      | Save this link to return to this page and manage your #{@quiz.quiz_type}
       br
-      small.text-muted As you you know we don't use sessions. This link is the only way to save your survey.
+      small.text-muted As you you know we don't use sessions. This link is the only way to save your #{@quiz.quiz_type}.
     .input-group.mb-3
       = text_field_tag 'owner-link', url_for([@quiz, { only_path: false }]),
         readonly: true, class: 'form-control text-secondary'

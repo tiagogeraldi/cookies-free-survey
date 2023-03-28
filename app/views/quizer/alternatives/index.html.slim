@@ -19,10 +19,11 @@ table.table.table-striped.mt-4
     tr id=dom_id(alternative)
       td.text-end = i + 1
       td = alternative.description
-      td.text-center
-        - if alternative.correct
-          span.badge.text-bg-success
-            | Correct answer
+      - if @quiz.quiz?
+        td.text-center
+          - if alternative.correct
+            span.badge.text-bg-success
+              | Correct answer
       td.text-end
         = link_to edit_quizer_quiz_question_alternative_path(@quiz, @question, alternative),
           class: 'btn btn-sm btn-outline-primary' do
