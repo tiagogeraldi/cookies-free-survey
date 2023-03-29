@@ -23,7 +23,7 @@ class Quizer::AlternativesController < Quizer::BaseController
     @alternative = @question.alternatives.new(alternative_params)
 
     if @alternative.save
-      redirect_to quizer_quiz_question_alternatives_url(@quiz, @question), notice: "Alternative was successfully created."
+      redirect_to quizer_quiz_question_alternatives_url(@quiz, @question)
     else
       flash.now[:error] = @alternative.errors.full_messages.join('. ')
       render :new, status: :unprocessable_entity
@@ -33,7 +33,7 @@ class Quizer::AlternativesController < Quizer::BaseController
   # PATCH/PUT /quizer/alternatives/1
   def update
     if @alternative.update(alternative_params)
-      redirect_to quizer_quiz_question_alternatives_url(@quiz, @question), notice: "Alternative was successfully updated."
+      redirect_to quizer_quiz_question_alternatives_url(@quiz, @question)
     else
       flash.now[:error] = @alternative.errors.full_messages.join('. ')
       render :edit, status: :unprocessable_entity
@@ -44,7 +44,7 @@ class Quizer::AlternativesController < Quizer::BaseController
   def destroy
     @alternative.destroy
 
-    redirect_to quizer_quiz_question_url(@quiz, @question), notice: "Alternative was successfully destroyed."
+    redirect_to quizer_quiz_question_url(@quiz, @question)
   end
 
   private

@@ -25,7 +25,7 @@ class Quizer::QuestionsController < Quizer::BaseController
 
     if @question.save
       if @question.open_ended?
-        redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully created."
+        redirect_to quizer_quiz_questions_url(@quiz)
       else
         redirect_to quizer_quiz_question_alternatives_url(@quiz, @question)
       end
@@ -41,7 +41,7 @@ class Quizer::QuestionsController < Quizer::BaseController
       if params[:go_back]
         redirect_to params[:go_back]
       else
-        redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully updated."
+        redirect_to quizer_quiz_questions_url(@quiz)
       end
     else
       flash.now[:error] = @question.errors.full_messages.join('. ')
@@ -53,7 +53,7 @@ class Quizer::QuestionsController < Quizer::BaseController
   def destroy
     @question.destroy
 
-    redirect_to quizer_quiz_questions_url(@quiz), notice: "Question was successfully destroyed."
+    redirect_to quizer_quiz_questions_url(@quiz)
   end
 
   def move_up

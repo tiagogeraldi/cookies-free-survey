@@ -84,7 +84,7 @@ class Quizer::QuizzesController < Quizer::BaseController
       end
     end
 
-    redirect_to cloned, notice: "Your cloned survey is ready"
+    redirect_to cloned
   end
 
   private
