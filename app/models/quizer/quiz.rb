@@ -1,7 +1,7 @@
-FREE_PERIOD_DAYS = 14.freeze
-PAID_PERIOD_DAYS = 180.freeze
-
 class Quizer::Quiz < ApplicationRecord
+  FREE_PERIOD_DAYS = 14.freeze
+  PAID_PERIOD_DAYS = 180.freeze
+
   has_many :questions, dependent: :destroy,
            class_name: 'Quizer::Question'
 

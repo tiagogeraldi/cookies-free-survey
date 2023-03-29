@@ -5,6 +5,12 @@ h3
     i.bi.bi-plus-circle.me-1
     | Add question
 
+p
+  small.text-muted
+    | Use the arrows in the last column to change the order of the questions.
+    br
+    | Your audience will answer the questions in the following order.
+
 table.table.table-striped.mt-3
   tr
     th
@@ -14,6 +20,7 @@ table.table.table-striped.mt-3
     th Alternatives
     th
     th Order
+
   - @questions.each.with_index do |question, index|
     tr
       td.text-end = index + 1
