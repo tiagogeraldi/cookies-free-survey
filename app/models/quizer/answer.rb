@@ -1,5 +1,5 @@
 class Quizer::Answer < ApplicationRecord
-  belongs_to :quiz
+  belongs_to :quiz, counter_cache: true
   belongs_to :question
 
   has_many :answer_alternatives, class_name: 'Quizer::AnswerAlternative', dependent: :destroy

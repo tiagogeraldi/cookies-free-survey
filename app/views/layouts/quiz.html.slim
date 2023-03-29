@@ -41,6 +41,7 @@ html
                 = link_to quizer_quiz_results_path(@quiz), class: 'btn btn-sm me-2' do
                   i.bi.bi-bullseye.me-1
                   | Results / Answers
+                  span.badge.text-bg-light.ms-1 = @quiz.answers_count
 
                 = link_to quizer_quiz_exports_path(@quiz), class: 'btn btn-sm me-2' do
                   i.bi.bi-arrow-bar-down.me-1

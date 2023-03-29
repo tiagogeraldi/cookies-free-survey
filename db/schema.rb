@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_214434) do
     t.boolean "active", default: true
     t.boolean "paid", default: false
     t.integer "quiz_type"
+    t.integer "answers_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["audience_secret"], name: "index_quizer_quizzes_on_audience_secret", unique: true
