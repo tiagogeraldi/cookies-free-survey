@@ -24,24 +24,24 @@ class Quizer::QuizzesController < Quizer::BaseController
 
   # GET /quizer/quizzes/new
   def new
-    @quiz = Quizer::Quiz.new(quiz_type: params[:quiz_type])
+    description = if params[:quiz_type] == 'quiz'
+      Quizer::Quiz::DESCRIPTION_QUIZ_EXAMPLE
+    else
+      Quizer::Quiz::DESCRIPTION_SURVEY_EXAMPLE
+    end
+
+    @quiz = Quizer::Quiz.new(
+      quiz_type: params[:quiz_type],
+      description: description
+    )
+    @quiz.generate_secrets
+    @quiz.save!
+
+    redirect_to @quiz
   end
 
   # GET /quizer/quizzes/1/edit
   def edit
-  end
-
-  # POST /quizer/quizzes
-  def create
-    @quiz = Quizer::Quiz.new(quiz_params)
-    @quiz.generate_secrets
-
-    if @quiz.save
-      redirect_to quizer_quiz_url(@quiz)
-    else
-      flash.now[:error] = @quiz.errors.full_messages.join('. ')
-      render :new, status: :unprocessable_entity
-    end
   end
 
   # PATCH/PUT /quizer/quizzes/1

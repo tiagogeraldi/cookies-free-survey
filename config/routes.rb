@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admss', as: 'rails_admin'
 
   namespace :quizer, path: 'q' do
-    resources :quizzes, path: 'q', param: :owner_secret do
+    resources :quizzes, except: :create, path: 'q', param: :owner_secret do
       collection do
         get :help
       end

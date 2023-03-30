@@ -51,6 +51,16 @@ To get started, simply click the button below:
     end.to_date
   end
 
+  def default_description?
+    if quiz?
+      return description == DESCRIPTION_QUIZ_EXAMPLE
+    else
+      return description == DESCRIPTION_SURVEY_EXAMPLE
+    end
+
+    false
+  end
+
   # Valid only for Quiz types:
   #
   # For select_one question type,
