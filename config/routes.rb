@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   namespace :quizer, path: 'q' do
     resources :quizzes, path: 'q', param: :owner_secret do
+      collection do
+        get :help
+      end
       member do
         post :clone
         patch :toggle_active

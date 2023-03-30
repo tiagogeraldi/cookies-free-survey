@@ -12,7 +12,9 @@ html
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.me-auto.mb-2.mb-lg-0
             li.nav-item
-              = link_to "#{@quiz&.quiz_type || 'Survey'} Maker", quizer_quizzes_url, class: 'nav-link active'
+              = link_to "#{@quiz&.quiz_type&.humanize || 'Survey'} Maker", quizer_quizzes_url, class: 'nav-link'
+            li.nav-item
+              = link_to "Help", help_quizer_quizzes_url, class: 'nav-link'
             li.nav-item
               = link_to 'Contact us', new_contact_url, class: 'nav-link'
 

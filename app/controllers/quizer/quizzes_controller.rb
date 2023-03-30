@@ -7,6 +7,9 @@ class Quizer::QuizzesController < Quizer::BaseController
   def index
   end
 
+  def help
+  end
+
   # GET /quizer/quizzes/1
   def show
     @last_answer = @quiz.answers.last
