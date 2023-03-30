@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  resources :contacts, only: %i(new create index)
+
   mount RailsAdmin::Engine => '/admss', as: 'rails_admin'
+
   namespace :quizer, path: 'q' do
     resources :quizzes, path: 'q', param: :owner_secret do
       member do

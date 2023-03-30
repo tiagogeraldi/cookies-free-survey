@@ -1,0 +1,13 @@
+h3 Contact us
+p.lead Please contact us if you need help, want to report a problem, or give your opinion and suggestion about our product
+= form_with(model: @contact) do |form|
+  .my-4
+    .row
+      .col-md-4.col-12
+        = form.label :email, 'Your e-mail address', class: 'form-label'
+        = form.text_field :email, class: 'form-select'
+  .my-4
+    = form.label :message, class: 'form-label'
+    = form.text_area :message, class: 'form-control', rows: 7
+
+  = form.submit 'Send', class: 'btn btn-primary btn-lg'
