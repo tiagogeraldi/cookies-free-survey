@@ -23,7 +23,11 @@ class Quizer::AlternativesController < Quizer::BaseController
     @alternative = @question.alternatives.new(alternative_params)
 
     if @alternative.save
-      redirect_to quizer_quiz_question_alternatives_url(@quiz, @question)
+      if params[:commit] == 'Save and go back'
+        redirect_to quizer_quiz_question_alternatives_url(@quiz, @question)
+      else
+        redirect_to new_quizer_quiz_question_alternative_url(@quiz, @question)
+      end
     else
       flash.now[:error] = @alternative.errors.full_messages.join('. ')
       render :new, status: :unprocessable_entity

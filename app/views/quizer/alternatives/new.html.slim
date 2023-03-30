@@ -4,3 +4,6 @@ p = link_to "< Back to the question", quizer_quiz_question_alternatives_path(@qu
 h3 New alternative
 = form_with(model: [@quiz, @question, @alternative], url: quizer_quiz_question_alternatives_path) do |form|
   = render "form", alternative: @alternative, form: form
+
+  = form.submit 'Save and go back', class: 'btn btn-primary btn-lg me-2'
+  = form.submit 'Save and create a new one', class: 'btn btn-secondary btn-lg'
