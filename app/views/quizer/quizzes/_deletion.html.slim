@@ -5,9 +5,11 @@ hr.line
       small
         = "Please be aware this #{@quiz.quiz_type} and all data will be deleted at #{l @quiz.expiration_date}."
         br
-        strong Free surveys or quizzes last for #{Quizer::Quiz::FREE_PERIOD_DAYS} days, but when paid it lasts for last for #{Quizer::Quiz::PAID_PERIOD_DAYS} days.
+        strong Free surveys or quizzes last for #{Quizer::Quiz::FREE_PERIOD_DAYS} days, but when paid they last for last for #{Quizer::Quiz::PAID_PERIOD_DAYS} days.
         br
-        em You can clone this survey to re-use the questions you created but it won't keep the results.
+        em You can clone this survey to re-use the questions and reset
+        br
+        em the expiration date but it won't keep the results.
 = button_to @quiz,
   method: :delete,
   class: 'btn btn-danger btn-sm',
