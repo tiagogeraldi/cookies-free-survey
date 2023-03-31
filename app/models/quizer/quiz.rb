@@ -92,4 +92,16 @@ To get started, simply click the button below:
 
     correct_count
   end
+
+  def expiration_alert_class
+    remaining_days = (expiration_date - Date.current)
+
+    if remaining_days <= 5
+      'alert-danger'
+    elsif remaining_days <= 14
+      'alert-warning'
+    else
+      'alert-info'
+    end
+  end
 end

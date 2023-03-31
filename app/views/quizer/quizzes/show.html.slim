@@ -1,8 +1,8 @@
 - if @quiz.questions.blank?
-  .alert.alert-info
+  .alert.alert-info.col-lg-4.col-12.text-center
     | You can start creating your first question #{link_to 'here', new_quizer_quiz_question_path(@quiz), class: 'alert-link'}
 - elsif @quiz.default_description?
-  .alert.alert-warning
+  .alert.alert-warning.col-lg-4.col-12.text-center
     | Remeber to change the welcome message #{link_to 'here', edit_quizer_quiz_path(@quiz), class: 'alert-link'}
 .row
   .col-md-6.col-sm-12.mt-2
@@ -35,7 +35,7 @@
         = link_to '#', class: 'clipboard', data: { clipboard_target: '#audience-link' } do
           i.bi.bi-clipboard
 
-hr.line
+hr.line.mt-4
 .form-check.form-switch id="#{@quiz.id}-active"
   .my-3
     = render 'active'

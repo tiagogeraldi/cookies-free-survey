@@ -6,10 +6,17 @@ p When creating questions for a quiz, you can select what alternatives are corre
 
 p Questions of a survey doesn't have correct alternatives. On the other hand, you can create open-ended questions to get free text answers from your audience. This option doesn't exist for quizzes.
 
-h2 How the system works?
+h2.mt-4 How the system works?
 
 p You create a quiz or survey, no login or sign-up is necessary because we'll give a you unique link of your survey. You need to save this link to return to the management page of the survey or quiz, where you can access the results, create more questions, etc.
 
-p.mb-4 On the management page, the system provides a unique link that you can send to your audience using the way you want: email, social network, website page, whatever. The audience access the link to answer the questions completely anonymously, no sign-up or registration required.
+p On the management page, the system provides a unique link that you can send to your audience using the way you want: email, social network, website page, whatever. The audience access the link to answer the questions completely anonymously, no sign-up or registration required.
 
-= link_to 'Back to the home page', '/', class: 'btn btn-lg btn-secondary'
+h2.mt-4 Paid vs Free
+
+p Free and paid surveys or questions have the same resources and doesn't have any limitation of number of records or accesses. The system automatically deletes the surveys or quizzes after a while and here is the difference between paid and free.
+
+p Free surveys or quizzes last for only #{Quizer::Quiz::FREE_PERIOD_DAYS} days. After that all data is deleted, you can't not even access the management page. You and your audience will get a 404 error page when accessing the survey after 14 days of the creation time. On the other hand, paid quizzes or surveys remains for #{Quizer::Quiz::PAID_PERIOD_DAYS} days.
+
+.mt-4
+  = link_to 'Back to the home page', '/', class: 'btn btn-lg btn-secondary'
