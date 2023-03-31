@@ -60,6 +60,12 @@ group :development, :test do
   gem "faker"
 end
 
+group :test do
+  gem "factory_bot_rails"
+  gem "rspec-rails"
+  gem "shoulda-matchers"
+end
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"

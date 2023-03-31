@@ -54,7 +54,7 @@ To get started, simply click the button below:
   def default_description?
     if quiz?
       return description == DESCRIPTION_QUIZ_EXAMPLE
-    else
+    elsif survey?
       return description == DESCRIPTION_SURVEY_EXAMPLE
     end
 
@@ -95,7 +95,6 @@ To get started, simply click the button below:
 
   def expiration_alert_class
     remaining_days = (expiration_date - Date.current)
-
     if remaining_days <= 5
       'alert-danger'
     elsif remaining_days <= 14
