@@ -17,11 +17,11 @@ class Quizer::Answer < ApplicationRecord
   private
 
   def open_ended?
-    question.open_ended?
+    question&.open_ended?
   end
 
   def at_least_one_alternative
-    if alternatives.blank?
+    if question && alternatives.blank?
       if question.select_one?
         errors.add :base, 'Select one alternative'
       elsif question.select_one_or_more?

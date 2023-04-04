@@ -83,7 +83,7 @@ To get started, simply click the button below:
 
     scope.where(quizer_questions: { question_type: 'select_one_or_more' }).each do |answer|
       correct_ids = answer.question.alternatives.select(&:correct).map(&:id)
-      answered_ids = answer.alternatives.map(&:id)
+      answered_ids = answer.alternatives.pluck(&:id)
 
       if (answered_ids - correct_ids).blank?
         correct_count += 1
