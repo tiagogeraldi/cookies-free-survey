@@ -5,7 +5,10 @@ FactoryBot.define do
 
     after :build do |record|
       record.quiz = record.question.quiz
-      record.alternatives << build(:alternative, question: record.question)
+
+      if record.alternatives.blank?
+        record.alternatives = [build(:alternative, question: record.question)]
+      end
     end
   end
 end

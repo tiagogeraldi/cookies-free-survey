@@ -68,7 +68,7 @@ RSpec.describe Quizer::Quiz, type: :model do
 
   describe '#correct_answers_count' do
     let(:quiz) { create :quiz }
-    let(:session_hex) { "1234" }
+    let(:session_hex) { Faker::Barcode.ean }
 
     context 'select_one' do
       let(:question) { create(:question, quiz: quiz, question_type: 'select_one') }
@@ -94,8 +94,7 @@ RSpec.describe Quizer::Quiz, type: :model do
       let!(:alternative2) { create(:alternative, question: question) }
 
       it 'considers correct when at least one correct answer is selected' do
-        create :answer, quiz: quiz, question: question, alternatives: [alternative1], session_hex: session_hex
-
+        create(:answer, quiz: quiz, question: question, alternatives: [alternative1], session_hex: session_hex)
         expect(quiz.correct_answers_count(session_hex)).to eq 1
       end
 
