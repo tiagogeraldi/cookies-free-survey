@@ -43,14 +43,6 @@ class Quizer::Question < ApplicationRecord
     @answers_count ||= answers.count
   end
 
-  def prev_question
-    quiz.questions.order(:position).where('position < ?', position).last
-  end
-
-  def next_question
-    quiz.questions.order(:position).where('position > ?', position).first
-  end
-
   def switch_position!(other_question)
     transaction do
       new_position = other_question.position

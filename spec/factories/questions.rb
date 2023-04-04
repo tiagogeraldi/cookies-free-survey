@@ -3,6 +3,6 @@ FactoryBot.define do
     quiz
     question_type { 'select_one' }
     description { Faker::Fantasy::Tolkien.poem }
-    position { 0 }
+    sequence(:position) { |n| n }
   end
 end
