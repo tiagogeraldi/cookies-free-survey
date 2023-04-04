@@ -1,2 +1,0 @@
-module Quizer::QuestionsHelper
-end

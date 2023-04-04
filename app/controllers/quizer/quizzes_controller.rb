@@ -15,13 +15,6 @@ class Quizer::QuizzesController < Quizer::BaseController
     @last_answer = @quiz.answers.last
   end
 
-  def results
-    @answers = @quiz.answers.
-      includes(:alternatives, :quiz, :question).
-      order(created_at: :desc).
-      paginate(page: params[:page], per_page: 30)
-  end
-
   # GET /quizer/quizzes/new
   def new
     description = if params[:quiz_type] == 'quiz'
