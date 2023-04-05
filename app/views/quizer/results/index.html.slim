@@ -1,5 +1,5 @@
 h5
-  | #{pluralize @total_people, 'person'} have answered your survey across #{pluralize @total_questions, 'question'}.
+  | #{pluralize @total_people, 'person'} have answered your #{@quiz.quiz_type} across #{pluralize @total_questions, 'question'}.
 
 .d-flex.my-4
   = link_to logs_quizer_quiz_results_path(@quiz),
