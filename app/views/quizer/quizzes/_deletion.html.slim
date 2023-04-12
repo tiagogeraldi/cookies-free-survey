@@ -1,18 +1,23 @@
-hr.line
-.row
-  .col-lg-6.col-12.mt-4.pt-4
-    .alert class=@quiz.expiration_alert_class
-      small
-        = "Please be aware this #{@quiz.quiz_type} and all data will be deleted at #{l @quiz.expiration_date}."
-        br
-        strong Free surveys or quizzes last for #{Quizer::Quiz::FREE_PERIOD_DAYS} days, but when paid they last for last for #{Quizer::Quiz::PAID_PERIOD_DAYS} days.
-        br
-        em You can clone this survey to re-use the questions and reset
-        br
-        em the expiration date but it won't keep the results.
+- unless @quiz.paid
+  .alert class=@quiz.expiration_alert_class
+    small
+      = "Please be aware this #{@quiz.quiz_type} and all data will be deleted at #{l @quiz.expiration_date}."
+      br
+      strong Free surveys or quizzes last for #{Quizer::Quiz::FREE_PERIOD_DAYS} days, but when paid they last for last for #{Quizer::Quiz::PAID_PERIOD_DAYS} days.
+      br
+      em You can clone this survey to re-use the questions and reset
+      br
+      em the expiration date but it won't keep the results.
+
+  p
+    = link_to 'Pay for it',
+      quizer_quiz_payments_path(@quiz),
+      class: 'btn btn-primary btn-sm',
+      data: { turbo: false }
+
 = button_to @quiz,
   method: :delete,
   class: 'btn btn-danger btn-sm',
   data: { turbo_confirm: "Are you sure you want to delete this #{@quiz.quiz_type}?" } do
   i.bi.bi-trash.me-1
-  | Delete now
+  | Delete #{@quiz.quiz_type}

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'payments/index'
   resources :contacts, only: %i(new create index)
 
   mount RailsAdmin::Engine => '/admss', as: 'rails_admin'
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
       end
 
       resources :exports, only: %i(index show)
+      resources :payments, only: %i(index create)
     end
 
     resources :answers, path: 'a', only: %i(index new) do
@@ -41,7 +43,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   root "quizer/quizzes#index"

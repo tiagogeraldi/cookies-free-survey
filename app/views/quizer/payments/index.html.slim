@@ -1,0 +1,62 @@
+script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"
+
+.col-lg-6.mx-auto.text-center
+  p.lead
+    | For only 5 dollars you extend your survey for 180 days
+    br
+    | and get all ads removed.
+
+  p.lead Free surveys last for only 14 days.
+
+  p.lead
+    strong Pay $5 now and help us to keep the project!
+
+  #paypal-button-container
+
+javascript:
+  paypal.Buttons({
+    // Order is created on the server and the order id is returned
+    createOrder() {
+      return fetch("#{url_for quizer_quiz_payments_url(@quiz)}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // use the "body" param to optionally pass additional order information
+        // like product skus and quantities
+        body: JSON.stringify({
+          cart: [
+            {
+              sku: "access_token$sandbox$62fmzrcvhdnqbv3f$692a4362d5ebb2edaa709671dc9a2422",
+              quantity: "5",
+            },
+          ],
+        }),
+      })
+      .then((response) => response.json())
+      .then((order) => order.id);
+    },
+    // Finalize the transaction on the server after payer approval
+    onApprove(data) {
+      return fetch("/my-server/capture-paypal-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderID: data.orderID
+        })
+      })
+      .then((response) => response.json())
+      .then((orderData) => {
+        // Successful capture! For dev/demo purposes:
+        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+        const transaction = orderData.purchase_units[0].payments.captures[0];
+        alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+        // When ready to go live, remove the alert and show a success message within this page. For example:
+        // const element = document.getElementById('paypal-button-container');
+        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+        // Or go to another URL:  window.location.href = 'thank_you.html';
+      });
+    }
+  }).render('#paypal-button-container');

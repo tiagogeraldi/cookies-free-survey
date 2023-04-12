@@ -42,4 +42,6 @@ hr.line.mt-4
 - if @last_answer
   em You got an answer #{time_ago_in_words @last_answer.created_at} ago.
 
-= render 'deletion'
+hr.line
+.col-lg-6.col-12.mt-4.pt-4
+  = render 'deletion'

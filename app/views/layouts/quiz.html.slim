@@ -21,7 +21,7 @@ html
     .container-sm
       - if @quiz&.persisted?
         .mt-3
-          nav.navbar.navbar-primary.bg-dark.bg-opacity-25.rounded
+          nav.navbar.navbar-primary.bg-dark.bg-opacity-10.rounded
             .container-fluid
               .d-flex
                 = link_to @quiz, class: 'btn btn-sm me-2' do
@@ -57,6 +57,12 @@ html
                   data: { turbo_confirm: "This action is going to create a new #{@quiz.quiz_type} cloning your current questions and alternatives. Do you want to continue?" } do
                   i.bi.bi-back.me-1
                   | Clone #{@quiz.quiz_type.humanize}
+
+                = link_to quizer_quiz_payments_path(@quiz),
+                  class: 'btn btn-sm me-2',
+                  data: { turbo: false }
+                  i.bi.bi-paypal.me-1
+                  | Pay for it
 
       = render '/layouts/alerts'
 
