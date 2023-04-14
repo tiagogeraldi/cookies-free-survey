@@ -58,11 +58,12 @@ html
                   i.bi.bi-back.me-1
                   | Clone #{@quiz.quiz_type.humanize}
 
-                = link_to quizer_quiz_payments_path(@quiz),
-                  class: 'btn btn-sm me-2',
-                  data: { turbo: false }
-                  i.bi.bi-paypal.me-1
-                  | Pay for it
+                - unless @quiz.paid
+                  = link_to quizer_quiz_payments_path(@quiz),
+                    class: 'btn btn-sm me-2',
+                    data: { turbo: false }
+                    i.bi.bi-paypal.me-1
+                    | Pay for it
 
       = render '/layouts/alerts'
 

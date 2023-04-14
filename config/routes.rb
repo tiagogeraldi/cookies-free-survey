@@ -33,7 +33,11 @@ Rails.application.routes.draw do
       end
 
       resources :exports, only: %i(index show)
-      resources :payments, only: %i(index create)
+      resources :payments, only: %i(index create) do
+        collection do
+          post :approve
+        end
+      end
     end
 
     resources :answers, path: 'a', only: %i(index new) do

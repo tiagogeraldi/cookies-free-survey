@@ -1,6 +1,6 @@
 script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"
 
-.col-lg-6.mx-auto.text-center
+#content.col-lg-6.mx-auto.text-center
   p.lead
     | For only 5 dollars you extend your survey for 180 days
     br
@@ -27,8 +27,7 @@ javascript:
         body: JSON.stringify({
           cart: [
             {
-              sku: "access_token$sandbox$62fmzrcvhdnqbv3f$692a4362d5ebb2edaa709671dc9a2422",
-              quantity: "5",
+              sku: "#{@quiz.owner_secret}"
             },
           ],
         }),
@@ -38,7 +37,7 @@ javascript:
     },
     // Finalize the transaction on the server after payer approval
     onApprove(data) {
-      return fetch("/my-server/capture-paypal-order", {
+      return fetch("#{url_for approve_quizer_quiz_payments_url(@quiz)}", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,14 +48,8 @@ javascript:
       })
       .then((response) => response.json())
       .then((orderData) => {
-        // Successful capture! For dev/demo purposes:
-        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-        const transaction = orderData.purchase_units[0].payments.captures[0];
-        alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-        // When ready to go live, remove the alert and show a success message within this page. For example:
-        // const element = document.getElementById('paypal-button-container');
-        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-        // Or go to another URL:  window.location.href = 'thank_you.html';
+        const element = document.getElementById('content');
+        element.innerHTML = "<h3>Thank you for your payment!</h3><a href='#{url_for @quiz}' class='btn btn-primary'>Go home</a>";
       });
     }
   }).render('#paypal-button-container');

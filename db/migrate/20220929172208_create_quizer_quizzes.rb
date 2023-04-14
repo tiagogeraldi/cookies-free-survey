@@ -8,6 +8,7 @@ class CreateQuizerQuizzes < ActiveRecord::Migration[7.0]
       t.boolean :paid, default: false
       t.integer :quiz_type
       t.integer :answers_count
+      t.string :order_id
 
       t.timestamps
     end
