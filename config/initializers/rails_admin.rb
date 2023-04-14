@@ -36,10 +36,10 @@ RailsAdmin.config do |config|
     index                         # mandatory
     new
     export
-    bulk_delete
+    #bulk_delete
     show
-    edit
-    delete
+    #edit
+    #delete
     show_in_app
 
     ## With an audit adapter, you can add:

@@ -34,7 +34,6 @@ class Quizer::PaymentsController < Quizer::BaseController
       headers: { 'Content-Type' => 'application/json' }
     )
     @quiz.update!(paid: true)
-    binding.break
     render json: response
   end
 end
