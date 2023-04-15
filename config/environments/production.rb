@@ -79,5 +79,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.paypal_url = 'https://api-m.sandbox.paypal.com'
+  config.paypal_url = 'https://api-m.paypal.com'
 end
