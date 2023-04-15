@@ -20,49 +20,53 @@ html
     .container-sm
       - if @quiz&.persisted?
         .mt-3
-          nav.navbar.navbar-primary.bg-dark.bg-opacity-10.rounded
+          nav.navbar.navbar-primary.bg-dark.bg-opacity-10.rounded.navbar-expand-lg
             .container-fluid
-              .d-flex
-                = link_to @quiz, class: 'btn btn-sm me-2' do
-                  i.bi.bi-house.me-1
-                  | Home
+              button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#quiz-actions" aria-controls="quiz-actions" aria-expanded="false" aria-label="Toggle navigation"
+                span class="navbar-toggler-icon"
 
-                - if @quiz.questions.count == 0
-                  = link_to new_quizer_quiz_question_path(@quiz), class: 'btn btn-sm me-2' do
-                    i.bi.bi-question-diamond.me-1
-                    | New question
-                - else
-                  = link_to quizer_quiz_questions_url(@quiz), class: 'btn btn-sm me-2' do
-                    i.bi.bi-question-diamond.me-1
-                    | Questions
-                    span.badge.text-bg-light.ms-1 = @quiz.questions.count
+              #quiz-actions.collapse.navbar-collapse
+                ul.navbar-nav
+                  li.nav-link = link_to @quiz, class: 'btn btn-sm' do
+                    i.bi.bi-house.me-1
+                    | Home
 
-                = link_to edit_quizer_quiz_path(@quiz), class: 'btn btn-sm me-2' do
-                  i.bi.bi-pencil.me-1
-                  | Edit #{@quiz.quiz_type.humanize}
+                  - if @quiz.questions.count == 0
+                    li.nav-link = link_to new_quizer_quiz_question_path(@quiz), class: 'btn btn-sm' do
+                      i.bi.bi-question-diamond.me-1
+                      | New question
+                  - else
+                    li.nav-link = link_to quizer_quiz_questions_url(@quiz), class: 'btn btn-sm' do
+                      i.bi.bi-question-diamond.me-1
+                      | Questions
+                      span.badge.text-bg-light.ms-1 = @quiz.questions.count
 
-                = link_to quizer_quiz_results_path(@quiz), class: 'btn btn-sm me-2' do
-                  i.bi.bi-bullseye.me-1
-                  | Results / Answers
-                  span.badge.text-bg-light.ms-1 = @quiz.answers_count
+                  li.nav-link = link_to edit_quizer_quiz_path(@quiz), class: 'btn btn-sm' do
+                    i.bi.bi-pencil.me-1
+                    | Edit #{@quiz.quiz_type.humanize}
 
-                = link_to quizer_quiz_exports_path(@quiz), class: 'btn btn-sm me-2' do
-                  i.bi.bi-arrow-bar-down.me-1
-                  | Export data
+                  li.nav-link = link_to quizer_quiz_results_path(@quiz), class: 'btn btn-sm' do
+                    i.bi.bi-bullseye.me-1
+                    | Results / Answers
+                    span.badge.text-bg-light.ms-1 = @quiz.answers_count
 
-                = button_to clone_quizer_quiz_path(@quiz),
-                  class: 'btn btn-sm me-2',
-                  method: :post,
-                  data: { turbo_confirm: "This action is going to create a new #{@quiz.quiz_type} cloning your current questions and alternatives. Do you want to continue?" } do
-                  i.bi.bi-back.me-1
-                  | Clone #{@quiz.quiz_type.humanize}
+                  li.nav-link = link_to quizer_quiz_exports_path(@quiz), class: 'btn btn-sm' do
+                    i.bi.bi-arrow-bar-down.me-1
+                    | Export data
 
-                - unless @quiz.paid
-                  = link_to quizer_quiz_payments_path(@quiz),
-                    class: 'btn btn-sm me-2',
-                    data: { turbo: false }
-                    i.bi.bi-paypal.me-1
-                    | Pay for it
+                  li.nav-link = button_to clone_quizer_quiz_path(@quiz),
+                    class: 'btn btn-sm',
+                    method: :post,
+                    data: { turbo_confirm: "This action is going to create a new #{@quiz.quiz_type} cloning your current questions and alternatives. Do you want to continue?" } do
+                    i.bi.bi-back.me-1
+                    | Clone #{@quiz.quiz_type.humanize}
+
+                  - unless @quiz.paid
+                    li.nav-link = link_to quizer_quiz_payments_path(@quiz),
+                      class: 'btn btn-sm',
+                      data: { turbo: false }
+                      i.bi.bi-paypal.me-1
+                      | Pay for it
 
       = render '/layouts/alerts'
 
