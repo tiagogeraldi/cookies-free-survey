@@ -3,7 +3,4 @@
     "bootstrap-icons": "^1.10.3",
     "rails_admin": "3.1.2"
   }
-  // "scripts": {
-  //   "build:css": "sass ./app/assets/stylesheets/rails_admin.scss:./app/assets/builds/rails_admin.css --no-source-map --load-path=node_modules"
-  // }
 }
