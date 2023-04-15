@@ -2,5 +2,8 @@
   "dependencies": {
     "bootstrap-icons": "^1.10.3",
     "rails_admin": "3.1.2"
+  },
+  "scripts": {
+    "build:css": "cd ."
   }
 }
