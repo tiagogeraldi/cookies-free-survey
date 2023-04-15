@@ -279,6 +279,7 @@ DEPENDENCIES
   rails_admin
   redis (~> 4.0)
   rspec-rails
+  sassc-rails
   shoulda-matchers
   slim
   sprockets-rails
