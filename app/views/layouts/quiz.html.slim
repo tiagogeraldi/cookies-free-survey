@@ -61,13 +61,6 @@ html
                     i.bi.bi-back.me-1
                     | Clone #{@quiz.quiz_type.humanize}
 
-                  - unless @quiz.paid
-                    li.nav-link = link_to quizer_quiz_payments_path(@quiz),
-                      class: 'btn btn-sm',
-                      data: { turbo: false }
-                      i.bi.bi-paypal.me-1
-                      | Pay for it
-
       = render '/layouts/alerts'
 
       .mt-4 = yield

@@ -1,26 +1,3 @@
-- if @quiz.paid
-  p
-    small
-      | You have paid for this #{@quiz.quiz_type}! Thank you!
-      br
-      | Please be aware this #{@quiz.quiz_type} and all data will be deleted automatically in #{distance_of_time_in_words Date.current, @quiz.expiration_date}.
-- unless @quiz.paid
-  .alert class=@quiz.expiration_alert_class
-    small
-      = "Please be aware this #{@quiz.quiz_type} and all data will be deleted at #{l @quiz.expiration_date}."
-      br
-      strong Free surveys or quizzes last for #{Quizer::Quiz::FREE_PERIOD_DAYS} days, but when paid they last for last for #{Quizer::Quiz::PAID_PERIOD_DAYS} days.
-      br
-      em You can clone this survey to re-use the questions and reset
-      br
-      em the expiration date but it won't keep the results.
-
-  p
-    = link_to 'Pay for it',
-      quizer_quiz_payments_path(@quiz),
-      class: 'btn btn-primary btn-sm',
-      data: { turbo: false }
-
 = button_to @quiz,
   method: :delete,
   class: 'btn btn-outline-danger btn-sm',
