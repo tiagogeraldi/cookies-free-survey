@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a web app to create surveys or quizzes.
 
-Things you may want to cover:
+It is based on the idea that no session or cookies are necessary being a GDPR / Privacy / Free of tracking product.
 
-* Ruby version
+## How does it work?
 
-* System dependencies
+When you generate a quiz or survey, it creates a unique owner link. Saving it, you can always go back to manage and see your survey results.
 
-* Configuration
+In the same way, it generates a unique link you can send to your audience.
 
-* Database creation
+## Setup
 
-* Database initialization
+This is a Rails 7 with Hotwire project.
 
-* How to run the test suite
+`asdf install ruby 3.2.1 # or adapt it to your favorite ruby installer`
 
-* Services (job queues, cache servers, search engines, etc.)
+`gem install bundler`
 
-* Deployment instructions
+`bundle install`
 
-* ...
+`bundle exec rake db:create db:migrate`
+
+`bundle exec rails s`
+
+Go to:
+
+`https://localhost:3000`
+
+Or have a pre-defined survey to use as an example:
+
+`bundle exec rake db:seed`
