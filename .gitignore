@@ -25,3 +25,5 @@
 /config/master.key
 
 .env.sh
+
+/node_modules
