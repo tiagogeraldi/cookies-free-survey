@@ -22,6 +22,8 @@ This is a Rails 7 with Hotwire project.
 
 `bundle exec rake db:create db:migrate`
 
+`yarn install`
+
 `bundle exec rails s`
 
 Go to:

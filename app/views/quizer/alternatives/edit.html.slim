@@ -7,4 +7,4 @@ h2 Editing alternative
 = form_with(model: [@quiz, @question, @alternative], url: quizer_quiz_question_alternative_path) do |form|
   = render "form", alternative: @alternative, form: form
 
-  = form.submit 'Save', class: 'btn btn-primary btn-lg'
+  = form.submit 'Save', class: primary_button_class
