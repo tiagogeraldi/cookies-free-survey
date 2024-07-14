@@ -11,4 +11,4 @@
   = form.text_area :description, class: 'form-control', rows: 7,
     placeholder: Quizer::Question::DESCRIPTION_SURVEY_EXAMPLE
 
-= form.submit 'Save', class: 'btn btn-primary btn-lg'
+= responsive_form_submit(form, 'Save', 'btn btn-primary btn-lg')

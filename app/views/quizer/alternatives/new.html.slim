@@ -5,5 +5,7 @@ h3 New alternative
 = form_with(model: [@quiz, @question, @alternative], url: quizer_quiz_question_alternatives_path) do |form|
   = render "form", alternative: @alternative, form: form
 
-  = form.submit 'Save and go back', class: 'btn btn-primary btn-lg me-2'
-  = form.submit 'Save and create a new one', class: 'btn btn-secondary btn-lg'
+  div.d-flex.flex-wrap.gap-2
+    = responsive_form_submit(form, 'Save and create a new one', 'btn btn-secondary btn-lg')
+    = responsive_form_submit(form, 'Save and go back', 'btn btn-primary btn-lg')
+    
