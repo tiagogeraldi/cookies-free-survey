@@ -60,6 +60,10 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   gem "faker"
+
+  # [https://github.com/pry/pry]
+  gem "pry"
+
 end
 
 group :test do
